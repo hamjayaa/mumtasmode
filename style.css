@@ -1,0 +1,97 @@
+/* Menggunakan font Inter sebagai default */
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Efek Teks Gold (Gradien Statis) */
+.shimmer-text { 
+  background-image: linear-gradient(90deg, var(--tw-gradient-stops)); 
+  background-size: 100% auto; 
+  color: transparent; 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+}
+
+/* Animasi Kilau Bergerak (ShineX) */
+@keyframes shineX { 
+  0% { transform: translateX(-20%); } 
+  100% { transform: translateX(140%);} 
+}
+.animate-shineX { 
+  animation: shineX 8s ease-in-out infinite alternate; 
+}
+
+/* Animasi Gradien Berputar */
+@keyframes spinGradient { 
+  to { transform: rotate(360deg);} 
+}
+
+/* Animasi Marquee untuk Galeri */
+@keyframes marquee { 
+  0% { transform: translateX(0); } 
+  100% { transform: translateX(-50%); } 
+}
+@keyframes marquee-reverse { 
+  0% { transform: translateX(-50%); } 
+  100% { transform: translateX(0); } 
+}
+.animate-marquee { animation: marquee 90s linear infinite; }
+.animate-marquee-reverse { animation: marquee-reverse 90s linear infinite; }
+.animate-marquee:hover,
+.animate-marquee-reverse:hover { 
+  animation-play-state: paused; 
+}
+@keyframes pulse { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.06); } }
+
+
+/* Transisi Halus untuk Kartu Interaktif */
+.product-card, .event-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Transisi Accordion menggunakan max-height */
+.accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+/* Transisi untuk elemen yang muncul saat di-scroll */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(8px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out;
+}
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* Custom scrollbar yang disembunyikan saat diam */
+body::-webkit-scrollbar {
+  width: 2px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #FFC837;
+  border-radius: 1px;
+  transition: background-color 0.4s ease-out;
+}
+body:not(.scrolling)::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+body.scrolling::-webkit-scrollbar-thumb:hover {
+  background: #FFD700;
+}
+
+/* Light Theme overrides for gradients */
+.bg-conic-gradient {
+  background: conic-gradient(#FFD700,#FFC837,#FFB300,#FFD700);
+}
+
+.dark .bg-conic-gradient {
+  background: conic-gradient(theme('colors.light-dark'),theme('colors.light-neutral'),theme('colors.light-accent'),theme('colors.light-dark'));
+}
