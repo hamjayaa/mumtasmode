@@ -686,7 +686,7 @@ function initScrollbarHiding() {
 // Fungsi untuk inisialisasi Theme Toggle dan Logo
 function initThemeToggle() {
     // Definisikan URL logo untuk setiap tema
-    const LIGHT_LOGO_URL = "https://res.cloudinary.com/doqzgozyt/image/upload/v1758543444/logo_web_dceb0e.png";
+    const LIGHT_LOGO_URL = "https://res.cloudinary.com/doqzgozyt/image/upload/v1758699510/logo_light_a77nhs.png";
     const DARK_LOGO_URL = "https://res.cloudinary.com/doqzgozyt/image/upload/v1758518959/emas_ong_ntxmg8.png";
 
     const logoImg = document.getElementById('mumtas-logo');
