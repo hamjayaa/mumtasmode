@@ -38,6 +38,7 @@ jobs:
         
         # Deploy files using rsync with optimized settings
         rsync -avz --delete \
+          --no-owner --no-group --no-perms \
           --exclude '.git' \
           --exclude '.github' \
           --exclude '.gitignore' \
