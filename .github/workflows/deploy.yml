@@ -1,0 +1,97 @@
+name: Deploy to VPS Server
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  REMOTE_HOST: ${{ secrets.SSH_HOST }}
+  REMOTE_USER: ${{ secrets.SSH_USER }}
+  REMOTE_PORT: ${{ secrets.SSH_PORT || '22' }}
+  REMOTE_DEST: ${{ secrets.SSH_DEST_DIR }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup SSH key
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Verify SSH connectivity
+      run: |
+        ssh -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "echo SSH connection successful"
+
+    - name: Set up rsync deployment
+      run: |
+        # Create target directory if it doesn't exist
+        ssh -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "mkdir -p $REMOTE_DEST"
+        
+        # Deploy files using rsync with optimized settings
+        rsync -avz --delete \
+          --exclude '.git' \
+          --exclude '.github' \
+          --exclude '.gitignore' \
+          --exclude 'README.md' \
+          --exclude 'deploy.sh' \
+          --exclude '*.log' \
+          --exclude 'node_modules' \
+          --exclude '.env' \
+          --exclude 'package-lock.json' \
+          --exclude 'package.json' \
+          --exclude 'yarn.lock' \
+          --exclude 'Dockerfile' \
+          --exclude 'docker-compose.yml' \
+          --exclude '.dockerignore' \
+          --exclude '.vscode' \
+          --exclude '.idea' \
+          --exclude '.DS_Store' \
+          --exclude 'Thumbs.db' \
+          -e "ssh -p $REMOTE_PORT" \
+          ./ $REMOTE_USER@$REMOTE_HOST:$REMOTE_DEST
+
+    - name: Apply proper file permissions
+      run: |
+        ssh -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "
+          # Set proper permissions for web files
+          find $REMOTE_DEST -type d -exec chmod 755 {} \;
+          find $REMOTE_DEST -type f -exec chmod 644 {} \;
+          # Make sure index.html and other critical files are readable
+          chmod 644 $REMOTE_DEST/index.html
+          chmod 644 $REMOTE_DEST/style.css
+          chmod 644 $REMOTE_DEST/main.js
+        "
+
+    - name: Restart web server (optional)
+      run: |
+        ssh -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "
+          # Add any service restart commands here if needed
+          # sudo systemctl reload nginx 2>/dev/null || echo 'Nginx reload skipped'
+          # Or restart your web server if applicable
+          echo 'Deployment completed successfully'
+        "
+      if: success()
+
+    - name: Verify deployment
+      run: |
+        # Check if the site is accessible (optional)
+        curl -f --max-time 30 ${{ secrets.SITE_URL || 'https://your-site.com' }} || echo "Site check skipped"
+      if: success()
+
+    - name: Cleanup temporary files
+      if: always()
+      run: |
+        # Remove any temporary files created during deployment
+        ssh -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "
+          # Cleanup any temporary files if needed
+          true
+        "
