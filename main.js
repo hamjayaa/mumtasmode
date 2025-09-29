@@ -11,7 +11,7 @@ const PRODUCT_LIST = [
   { name: "Mumtas Mie – Collagen", desc: "Serum wajah menenangkan dengan Centella & Rose.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758630414/Gemini_Generated_Image_o5rrmzo5rrmzo5rr_ydrjzh.png" },
   { name: "Mumtas Mie - Moringa", desc: "Mie mocaf fungsional dengan ekstrak daun kelor.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758629447/Gemini_Generated_Image_in7tavin7tavin7t_hqwkfs.png" },
   { name: "Mumtas Mie – Spirulina", desc: "Minuman jahe merah pilihan, praktis untuk kehangatan.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758520868/Gingerissimo_Botol_gbzm0e.png" },
-  { name: "Natura Oil Squa", desc: "Minyak gosok serbaguna untuk pijat dan relaksasi.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758605999/Gemini_Generated_Image_l7t4lyl7t4lyl7t4_wbohye.png" }
+  { name: "Natura Oil Squa", desc: "Minyak gosok serbaguna untuk pijat dan relaksasi.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758605999/Gemini_Generated_Image_l7t4lyl7t4lyl7t4_wbohye.png" },
   { name: "Gamin Gathuk", desc: "Minyak gosok serbaguna untuk pijat dan relaksasi.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758605999/Gemini_Generated_Image_l7t4lyl7t4lyl7t4_wbohye.png" }
 ];
 const GALLERY_IMAGES = [
