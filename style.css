@@ -124,3 +124,16 @@ body.scrolling::-webkit-scrollbar-thumb:hover {
   footer ul li{line-height:1.55}
   footer .footer-divider{opacity:.9}
 }
+
+.contact-icon{width:20px;height:20px;color:#3a5a40}
+.dark .contact-icon{color:#ffffff}
+
+.social-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:2.8rem;width:2.8rem;border-radius:9999px;
+  border:1px solid rgba(58,90,64,.25);color:#344e41;background:transparent;
+  transition:all .25s ease
+}
+.social-btn:hover{border-color:#a87e00;color:#a87e00;transform:translateY(-2px)}
+.dark .social-btn{border-color:rgba(255,200,55,.35);color:#ffffff}
+.dark .social-btn:hover{border-color:#FFC837;color:#FFC837}
