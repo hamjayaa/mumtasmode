@@ -95,3 +95,31 @@ body.scrolling::-webkit-scrollbar-thumb:hover {
 .dark .bg-conic-gradient {
   background: conic-gradient(theme('colors.light-dark'),theme('colors.light-neutral'),theme('colors.light-accent'),theme('colors.light-dark'));
 }
+
+/* ===== Footer Enhancements ===== */
+.footer-link {
+  color: #344e41;
+  text-decoration: none;
+  transition: color .25s ease, opacity .25s ease;
+}
+.dark .footer-link { color: #FFC837; }
+.footer-link:hover { opacity: .85; }
+
+/* Tombol sosial: ring lembut + hover lift */
+.social-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: .5rem; height: 2.5rem; width: 2.5rem; border-radius: 9999px;
+  border: 1px solid rgba(58,90,64,.25);
+  color: #344e41; background: #ffffff;
+  transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease, border-color .25s ease, background-color .25s ease, color .25s ease;
+}
+.social-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+.dark .social-btn {
+  background: #0b0b0b; color: #FFC837; border-color: rgba(255,200,55,.35);
+}
+.dark .social-btn:hover {
+  box-shadow: 0 6px 24px rgba(255,200,55,.15);
+}
+
+/* Divider tipis (sudah inline di HTML, ini fallback) */
+.footer-divider { opacity: .9; }
