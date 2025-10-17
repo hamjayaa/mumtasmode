@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Penerima Promo - Team Up, Cash Up!</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/doqzgozyt/image/upload/v1758543444/c_scale,w_32/logo_web_dceb0e.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], } } }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-black transition-colors duration-300">
+    <header class="fixed top-0 left-0 right-0 z-20 flex justify-end p-4">
+        <button id="dark-mode-toggle" class="p-2 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-700 dark:text-yellow-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            </button>
+    </header>
+
+    <div id="app-root" class="min-h-screen w-full text-[#1b2b22] dark:text-gray-200">
+        <section id="hero-section" class="relative h-[86vh] flex flex-col justify-center items-center text-center bg-gray-50 dark:bg-black px-6 overflow-hidden">
+            <h1 id="hero-h1" class="text-[14vw] md:text-8xl leading-[0.9] font-extrabold uppercase text-[#2f4f3a] dark:text-gray-100 tracking-[0.1em]" style="opacity:0; transform: translateY(50px) scale(0.9);">Selamat</h1>
+            <div class="mt-2"><span id="hero-span" class="block text-[12vw] md:text-7xl font-extrabold uppercase tracking-tight bg-clip-text text-transparent animate-gradient" style="opacity:0; transform: translateY(30px);">Kepada Para Agen</span></div>
+            <p id="hero-p" class="mt-4 text-lg md:text-3xl font-semibold text-[#3a5a40] dark:text-gray-400" style="opacity:0; transform: translateY(20px);">Qualified MUMTAS yang berhasil <span class="text-[#588157] dark:text-yellow-400 font-bold">mencapai</span> promo!</p>
+        </section>
+        
+        <div id="info-bar" class="px-6 sm:px-10 -mt-12"></div>
+
+        <section id="filter-panel-section" class="px-6 sm:px-10 mt-4 relative z-10">
+            <div id="filter-panel" class="rounded-3xl border border-[#dce6d8] dark:border-gray-800 bg-white dark:bg-[#111111] p-6 sm:p-10">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+                    <div class="flex-1">
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-[#2f4f3a] dark:text-white">Pengumuman Penerima Hadiah</h2>
+                        <p class="mt-2 text-sm sm:text-base text-[#2f4f3a] dark:text-gray-400">Daftar Agen qualified yang berhak mendapatkan hadiah dari program promo aktif.</p>
+                    </div>
+                    <div class="grid w-full max-w-sm grid-cols-2 gap-3">
+                        <div class="rounded-2xl border border-[#a3b18a]/50 dark:border-yellow-600/30 bg-[#eaf2e6] dark:bg-yellow-900/20 p-4">
+                            <div class="text-xs text-[#3a5a40] dark:text-yellow-400">Promo Aktif</div>
+                            <div class="text-sm font-semibold text-gray-800 dark:text-gray-200">Team Up, Cash Up!</div>
+                        </div>
+                        <div class="rounded-2xl border border-[#dce6d8] dark:border-gray-800 bg-white dark:bg-gray-800/50 p-4">
+                            <div class="text-xs text-[#4c6b57] dark:text-gray-400">Total Qualified</div>
+                            <div id="total-qualified" class="text-lg font-extrabold text-gray-800 dark:text-white">...</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="controls-container"></div>
+                <div id="promo-tabs" class="mt-4 flex flex-wrap gap-2"></div>
+            </div>
+        </section>
+        <section class="px-6 sm:px-10 py-8"><div id="member-grid" class="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div><div id="no-results" class="text-center text-[#4c6b57] dark:text-gray-500 py-16 hidden">Tidak ada data yang cocok.</div></section>
+        <footer class="px-6 sm:px-10 pb-12"><div class="text-center text-sm sm:text-base text-[#2f4f3a] dark:text-gray-500 font-medium">Terima kasih atas pencapaian dan dedikasi Anda bersama Mumtas. Barakallahu Fiikum. Terus melaju, capai target berikutnya!</div></footer>
+    </div>
+    
+    <div id="modal-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div id="modal-container" class="w-full max-w-md">
+            </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
