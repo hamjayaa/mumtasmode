@@ -1,0 +1,44 @@
+body { font-family: 'Inter', sans-serif; }
+@keyframes gradientFlow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.animate-gradient { background-size: 400% 400%; animation: gradientFlow 12s ease infinite; }
+
+/* ===== MODAL STYLES & ANIMATIONS ===== */
+@keyframes shimmer-new { 0% { transform: translateX(-150%) skewX(-30deg); opacity: 0.5; } 100% { transform: translateX(150%) skewX(-30deg); opacity: 0.5; } }
+@keyframes falling-stars { 0% { transform: translateY(-100%); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
+@keyframes border-shimmer-sweep { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
+@keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+#modal-overlay { visibility: hidden; opacity: 0; transition: visibility 0s linear 0.3s, opacity 0.3s ease; }
+#modal-overlay.visible { visibility: visible; opacity: 1; transition: visibility 0s linear 0s, opacity 0.3s ease; }
+#modal-container > div { transform: scale(0.95); transition: transform 0.3s ease; }
+#modal-overlay.visible #modal-container > div { transform: scale(1); }
+
+.effects-container { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.effects-container .stars { position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background-image: radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%); background-repeat: no-repeat; background-size: 1.5px 1.5px; background-position: 10% 40%, 20% 90%, 35% 20%, 50% 60%, 75% 10%; animation: falling-stars 8s linear infinite; }
+.effects-container .hero-twinkles { position: absolute; inset: 0; background-image: radial-gradient(circle, var(--sparkle-color) 1.5px, transparent 1.5px), radial-gradient(circle, var(--sparkle-color) 1px, transparent 1px); background-repeat: no-repeat; background-size: 2px 2px; background-position: 15% 30%, 80% 75%; animation: twinkle 4s ease-in-out infinite; }
+.effects-container .shimmer { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, var(--shimmer-color) 50%, transparent 80%); animation: shimmer-new 4s ease-in-out infinite; }
+
+.shimmer-border-effect { position: relative; }
+.shimmer-border-effect::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 2px;
+    background: linear-gradient(120deg, transparent, var(--rank-border-color), transparent);
+    background-size: 200% 100%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out; mask-composite: exclude;
+    animation: border-shimmer-sweep 3s linear infinite; pointer-events: none;
+}
+
+/* --- UNIFIED RANK STYLES --- */
+.rank-style-default { --sparkle-color: #e5e7eb; --shimmer-color: rgba(209, 213, 219, 0.1); --rank-text-color: #9ca3af; --rank-border-color: #6b7280; --rank-bg-color: rgba(55, 65, 81, 0.5); }
+.rank-style-manager { --sparkle-color: #bbf7d0; --shimmer-color: rgba(134, 239, 172, 0.15); --rank-text-color: #86efac; --rank-border-color: #4ade80; --rank-bg-color: rgba(22, 101, 52, 0.5); }
+.rank-style-gold { --sparkle-color: #fde68a; --shimmer-color: rgba(252, 211, 77, 0.2); --rank-text-color: #fcd34d; --rank-border-color: #fbbf24; --rank-bg-color: rgba(146, 105, 12, 0.5); }
+.rank-style-diamond { --sparkle-color: #a5f3fc; --shimmer-color: rgba(103, 232, 249, 0.2); --rank-text-color: #7dd3fc; --rank-border-color: #38bdf8; --rank-bg-color: rgba(14, 116, 144, 0.5); }
+.rank-style-crown { --sparkle-color: #f472b6; --shimmer-color: rgba(244, 114, 182, 0.2); --rank-text-color: #f472b6; --rank-border-color: #c026d3; --rank-bg-color: rgba(134, 25, 143, 0.5); }
+.rank-style-kantor-cabang { --sparkle-color: #fda4af; --shimmer-color: rgba(244, 63, 94, 0.2); --rank-text-color: #fb7185; --rank-border-color: #f43f5e; --rank-bg-color: rgba(190, 18, 60, 0.5); }
+.rank-style-stokis { --sparkle-color: #fcd34d; --shimmer-color: rgba(251, 191, 36, 0.2); --rank-text-color: #fbbf24; --rank-border-color: #f59e0b; --rank-bg-color: rgba(217, 119, 6, 0.5); }
+.rank-style-sub-stokis { --sparkle-color: #a3e635; --shimmer-color: rgba(132, 204, 22, 0.2); --rank-text-color: #bef264; --rank-border-color: #84cc16; --rank-bg-color: rgba(77, 124, 15, 0.5); }
+
+.member-card { cursor: pointer; }
+#modal-photo-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 0.75rem; /* rounded-xl */ }
+#modal-photo-container div { width: 100%; height: 100%; object-fit: cover; } /* Dihapus: border-radius */
