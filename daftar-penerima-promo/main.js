@@ -73,7 +73,14 @@ const uiModal = { overlay: document.getElementById('modal-overlay'), container: 
 function renderModalContent(member, styleClass) {
     const photoContainerClass = member.photo ? 'border-4 border-white/20' : '';
     const photoHTML = member.photo ? `<img src="${member.photo}" alt="${member.name}"/>` : '';
-    return `<div class="relative rounded-2xl p-6 text-center shadow-xl text-white shimmer-border-effect ${styleClass}" style="background-color: var(--rank-bg-color);"><div class="effects-container"><div class="stars"></div><div class="shimmer"></div><div class="hero-twinkles"></div></div><div class="relative z-10"><button id="modal-close-btn" class="absolute top-2 right-2 p-2 text-gray-400 hover:text-white z-20"><i data-lucide="X" class="h-6 w-6"></i></button><div id="modal-photo-container" class="mx-auto h-24 w-24 rounded-xl shadow-md bg-transparent ${photoContainerClass}">${photoHTML}</div><h3 id="modal-name" class="mt-4 text-2xl font-extrabold text-white">${member.name}</h3><div id="modal-rank" class="mt-1 text-sm font-bold uppercase tracking-wider" style="color: var(--rank-text-color);">${member.rank}</div><div id="modal-level-stok" class="mt-1 text-xs font-semibold uppercase text-gray-400">${member.level_agen_stok}</div><div id="modal-details" class="mt-6 bg-black/30 rounded-xl p-4 border border-white/10"><p class="text-sm text-gray-300">Berhasil meraih hadiah promo:</p><p id="modal-reward" class="text-lg font-bold" style="color: var(--rank-text-color);">${member.reward}</p><p class="mt-2 text-xs text-gray-400">Qualified pada <span id="modal-date" class="font-semibold text-gray-200">${formatDateID(member.qualifiedAt)}</span></p></div></div></div>`;
+
+    return `<div class="relative rounded-2xl p-6 text-center shadow-xl text-white shimmer-border-effect ${styleClass}" style="background-color: var(--rank-bg-color);">
+        <div class="effects-container">
+            <div class="stars"></div>
+            <div class="stars stars-2"></div> <div class="shimmer"></div>
+            <div class="hero-twinkles"></div>
+        </div>
+        <div class="relative z-10"><button id="modal-close-btn" class="absolute top-2 right-2 p-2 text-gray-400 hover:text-white z-20"><i data-lucide="X" class="h-6 w-6"></i></button><div id="modal-photo-container" class="mx-auto h-24 w-24 rounded-xl shadow-md bg-transparent ${photoContainerClass}">${photoHTML}</div><h3 id="modal-name" class="mt-4 text-2xl font-extrabold text-white">${member.name}</h3><div id="modal-rank" class="mt-1 text-sm font-bold uppercase tracking-wider" style="color: var(--rank-text-color);">${member.rank}</div><div id="modal-level-stok" class="mt-1 text-xs font-semibold uppercase text-gray-400">${member.level_agen_stok}</div><div id="modal-details" class="mt-6 bg-black/30 rounded-xl p-4 border border-white/10"><p class="text-sm text-gray-300">Berhasil meraih hadiah promo:</p><p id="modal-reward" class="text-lg font-bold" style="color: var(--rank-text-color);">${member.reward}</p><p class="mt-2 text-xs text-gray-400">Qualified pada <span id="modal-date" class="font-semibold text-gray-200">${formatDateID(member.qualifiedAt)}</span></p></div></div></div>`;
 }
 
 window.openModal = function(memberId) { const member = members.find(m => m.id === memberId); if (!member) return; let style = 'default'; const promoType = (member.promo || "").toLowerCase(); if (promoType.includes('stok') || promoType.includes('agen')) { const level = (member.level_agen_stok || "").toLowerCase().replace(/\s+/g, '-'); style = level; } else { const rank = (member.rank || "").toLowerCase(); if (rank.includes('crown')) style = 'crown'; else if (rank.includes('diamond')) style = 'diamond'; else if (rank.includes('gold')) style = 'gold'; else if (rank.includes('manager')) style = 'manager'; } const styleClass = `rank-style-${style}`; uiModal.container.innerHTML = renderModalContent(member, styleClass); lucide.createIcons(); document.getElementById('modal-close-btn').onclick = closeModal; uiModal.overlay.classList.add('visible'); };
@@ -88,19 +95,19 @@ const moonIcon = `<i data-lucide="moon" class="h-5 w-5"></i>`;
 
 function applyTheme(isDark) {
     const heroSpan = document.getElementById('hero-span');
-    const heroH1 = document.getElementById('hero-h1'); // ⭐ Ambil elemen H1
+    const heroH1 = document.getElementById('hero-h1');
     if (isDark) {
         document.documentElement.classList.add('dark');
         darkModeToggle.innerHTML = sunIcon;
         heroSpan.style.backgroundImage = 'linear-gradient(270deg, #ca8a04, #f59e0b, #fcd34d, #eab308, #ca8a04)';
-        heroH1.classList.remove('text-[#2f4f3a]'); // Hapus kelas warna terang
-        heroH1.classList.add('dark:text-yellow-400'); // ⭐ Tambah kelas warna emas
+        heroH1.classList.remove('text-[#2f4f3a]');
+        heroH1.classList.add('dark:text-yellow-400');
     } else {
         document.documentElement.classList.remove('dark');
         darkModeToggle.innerHTML = moonIcon;
         heroSpan.style.backgroundImage = 'linear-gradient(270deg, #2f4f3a, #588157, #a3b18a, #3a5a40, #588157)';
-        heroH1.classList.add('text-[#2f4f3a]'); // Kembalikan kelas warna terang
-        heroH1.classList.remove('dark:text-yellow-400'); // ⭐ Hapus kelas warna emas
+        heroH1.classList.add('text-[#2f4f3a]');
+        heroH1.classList.remove('dark:text-yellow-400');
     }
     lucide.createIcons();
 }
