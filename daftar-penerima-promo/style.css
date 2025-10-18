@@ -15,7 +15,61 @@ body { font-family: 'Inter', sans-serif; }
 #modal-overlay.visible #modal-container > div { transform: scale(1); }
 
 .effects-container { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
-.effects-container .stars { position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background-image: radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%); background-repeat: no-repeat; background-size: 1.5px 1.5px; background-position: 10% 40%, 20% 90%, 35% 20%, 50% 60%, 75% 10%; animation: falling-stars 8s linear infinite; }
+
+/* DENSE STARFALL FIX */
+.effects-container .stars {
+    position: absolute;
+    left: 0;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    /* 40 gradients defined (20x 1px, 20x 1.5px) */
+    background-image:
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
+        
+    background-repeat: no-repeat;
+    background-size: 1.5px 1.5px;
+    /* 40 random positions for DENSE effect */
+    background-position: 
+        5% 10%, 25% 60%, 45% 95%, 60% 30%, 80% 50%, 15% 70%, 70% 85%, 90% 45%, 8% 88%, 33% 44%,
+        55% 11%, 77% 66%, 99% 19%, 3% 53%, 22% 80%, 48% 5%, 68% 40%, 88% 70%, 12% 99%, 37% 25%,
+        7% 12%, 27% 62%, 47% 97%, 62% 32%, 82% 52%, 17% 72%, 72% 87%, 92% 47%, 10% 90%, 35% 46%,
+        57% 13%, 79% 68%, 100% 21%, 5% 55%, 24% 82%, 50% 7%, 70% 42%, 90% 72%, 14% 100%, 39% 27%;
+    animation: falling-stars 8s linear infinite;
+}
+
+/* NEW: Style untuk lapisan bintang kedua (lebih lambat, lebih kecil) */
+.effects-container .stars-2 {
+    animation-duration: 12s; /* Kecepatan lebih lambat */
+    animation-delay: -3s; /* Mulai dari titik yang berbeda */
+    transform: scale(0.7); /* Ukuran lebih kecil */
+    /* Posisi random yang berbeda dari lapisan pertama */
+    background-position: 
+        1% 95%, 21% 5%, 41% 35%, 58% 80%, 78% 15%, 11% 50%, 65% 25%, 85% 65%, 4% 30%, 30% 75%,
+        51% 5%, 73% 90%, 93% 40%, 6% 60%, 26% 10%, 46% 45%, 66% 75%, 86% 20%, 16% 90%, 40% 65%,
+        3% 97%, 23% 7%, 43% 37%, 60% 82%, 80% 17%, 13% 52%, 67% 27%, 87% 67%, 6% 32%, 32% 77%,
+        53% 7%, 75% 92%, 95% 42%, 8% 62%, 28% 12%, 48% 47%, 68% 77%, 88% 22%, 18% 92%, 42% 67%;
+}
+/* END DENSE STARFALL FIX */
+
 .effects-container .hero-twinkles { position: absolute; inset: 0; background-image: radial-gradient(circle, var(--sparkle-color) 1.5px, transparent 1.5px), radial-gradient(circle, var(--sparkle-color) 1px, transparent 1px); background-repeat: no-repeat; background-size: 2px 2px; background-position: 15% 30%, 80% 75%; animation: twinkle 4s ease-in-out infinite; }
 .effects-container .shimmer { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, var(--shimmer-color) 50%, transparent 80%); animation: shimmer-new 4s ease-in-out infinite; }
 
