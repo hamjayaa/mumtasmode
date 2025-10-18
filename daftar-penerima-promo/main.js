@@ -17,10 +17,7 @@ const fmtMonthKey = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padSta
 const toMonthLabelID = (key) => key === "All" ? "Semua Bulan" : `${MONTHS_ID[parseInt(key.split("-")[1], 10) - 1]} ${key.split("-")[0]}`;
 const formatDateID = (dateStr) => { const d = new Date(dateStr); return isNaN(d.getTime()) ? dateStr : `${d.getDate()} ${MONTHS_ID[d.getMonth()]} ${d.getFullYear()}`; };
 const initials = (name) => (name || "").trim().split(/\s+/).filter(Boolean).map((s) => s[0]).join("").slice(0, 2).toUpperCase();
-
-// ICON 'gold' DIGANTI JADI 'Cuboid'
 function rankIcon(rank) { const r = (rank || "").toLowerCase(); let i = 'Star'; if (r.includes("loyal")) i = 'Medal'; else if (r.includes("crown")) i = 'Crown'; else if (r.includes("diamond")) i = 'Gem'; else if (r.includes("gold")) i = 'Cuboid'; return `<i data-lucide="${i}" class="h-4 w-4"></i>`; }
-
 function parseCSV(text) { const rows = []; let row = []; let cell = ""; let inQuotes = false; for (let i = 0; i < text.length; i++) { const ch = text[i]; const next = text[i + 1]; if (ch === '"') { if (inQuotes && next === '"') { cell += '"'; i++; } else { inQuotes = !inQuotes; } } else if (ch === "," && !inQuotes) { row.push(cell); cell = ""; } else if ((ch === "\n" || ch === "\r") && !inQuotes) { if (cell !== "" || row.length) { row.push(cell); cell = ""; } if (row.length) { rows.push(row); row = []; } if (ch === "\r" && next === "\n") i++; } else { cell += ch; } } if (cell !== "" || row.length) row.push(cell); if (row.length) rows.push(row); return rows.map((r) => r.map((c) => c.replace(/^\uFEFF/, "").trim())); }
 
 // =============================================================
@@ -40,7 +37,22 @@ async function fetchData() {
         const idx = { id: hIndex("id"), name: hIndex("name", "nama"), city: hIndex("city", "kota"), promo: hIndex("promo"), reward: hIndex("reward", "hadiah"), qualifiedAt: hIndex("qualifiedat", "qualified_at", "tanggal"), rank: hIndex("rank", "peringkat"), photo: hIndex("photo", "foto"), level_agen_stok: hIndex("level_agen_stok") };
         const missing = Object.entries(idx).filter(([k, v]) => ["id", "name", "qualifiedAt"].includes(k) && v === -1).map(([k]) => k);
         if (missing.length) throw new Error(`Kolom wajib hilang: ${missing.join(", ")}`);
-        members = rows.slice(1).map((cols) => ({ id: cols[idx.id] || "", name: cols[idx.name] || "", city: cols[idx.city] || "", promo: cols[idx.promo] || "", reward: cols[idx.reward] || "", qualifiedAt: cols[idx.qualifiedAt] || "", rank: cols[idx.rank] || "Manager", photo: cols[idx.photo] || undefined, level_agen_stok: idx.level_agen_stok !== -1 ? cols[idx.level_agen_stok] : "Sub Stokis" })).filter(m => m.id && m.name);
+        
+        // == PERUBAHAN 1: Menambahkan `_uniqueRowId` ==
+        // Kita tambahkan 'index' (0, 1, 2, ...) sebagai ID unik internal
+        members = rows.slice(1).map((cols, index) => ({ 
+            _uniqueRowId: index, // Ini ID unik barunya
+            id: cols[idx.id] || "", 
+            name: cols[idx.name] || "", 
+            city: cols[idx.city] || "", 
+            promo: cols[idx.promo] || "", 
+            reward: cols[idx.reward] || "", 
+            qualifiedAt: cols[idx.qualifiedAt] || "", 
+            rank: cols[idx.rank] || "Manager", 
+            photo: cols[idx.photo] || undefined, 
+            level_agen_stok: idx.level_agen_stok !== -1 ? cols[idx.level_agen_stok] : "Sub Stokis" 
+        })).filter(m => m.id && m.name);
+        
         members.sort((a, b) => +new Date(b.qualifiedAt) - +new Date(a.qualifiedAt));
         source = "sheet";
         syncedAt = new Date().toLocaleString("id-ID", { dateStyle: 'medium', timeStyle: 'short' });
@@ -59,7 +71,10 @@ async function fetchData() {
 function renderMemberCard(m) {
     const avatar = m.photo ? `<img src="${m.photo}" alt="${m.name}" class="h-20 w-20 shrink-0 rounded-xl object-cover"/>` : `<div class="h-20 w-20 shrink-0 rounded-xl bg-gradient-to-br from-[#a3b18a] via-[#588157] to-[#3a5a40] dark:from-yellow-500 dark:to-amber-600 text-white dark:text-black grid place-items-center text-lg font-extrabold">${initials(m.name)}</div>`;
     const rankBadge = m.rank ? `<div class="mt-1 inline-flex items-center gap-1 rounded-full border border-[#a3b18a] dark:border-yellow-600/50 bg-[#dde6d6] dark:bg-yellow-900/30 px-2 py-0.5 text-[11px] font-bold tracking-wide text-[#2f4f3a] dark:text-yellow-300">${rankIcon(m.rank)} <span class="uppercase">${m.rank}</span></div>` : '';
-    return `<div onclick="openModal('${m.id}')" class="member-card relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 border border-[#dce6d8] dark:border-gray-700 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all opacity-0 translate-y-4"><div class="absolute right-[-40px] top-[15px] rotate-45"><div class="bg-gradient-to-r from-[#a3b18a] to-[#588157] dark:from-yellow-500 dark:to-amber-600 text-white dark:text-black text-[10px] font-extrabold px-10 py-1 shadow">QUALIFIED</div></div><div class="flex items-center gap-4">${avatar}<div class="min-w-0"><div class="text-xs font-medium text-[#6b8f79] dark:text-gray-400">${m.id}</div><div class="text-base font-semibold text-[#1b2b22] dark:text-white truncate">${m.name}</div>${rankBadge}<div class="mt-1 text-xs text-[#4c6b57] dark:text-gray-400">${m.city} • <span class="font-medium text-[#2f4f3a] dark:text-gray-300">${m.promo}</span></div></div></div><div class="mt-4 rounded-xl border border-[#dce6d8] dark:border-gray-700 bg-[#f9faf9] dark:bg-zinc-800 p-4"><div class="flex flex-wrap items-center gap-2 text-sm text-[#1b2b22] dark:text-gray-200"><i data-lucide="Trophy" class="h-4 w-4"></i><span>Hadiah:</span><span class="font-semibold">${m.reward}</span></div></div></div>`;
+    
+    // == PERUBAHAN 2: `openModal` sekarang pakai `m._uniqueRowId` ==
+    // Kita gak lagi pakai m.id, tapi pakai ID unik baris
+    return `<div onclick="openModal(${m._uniqueRowId})" class="member-card relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 border border-[#dce6d8] dark:border-gray-700 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all opacity-0 translate-y-4"><div class="absolute right-[-40px] top-[15px] rotate-45"><div class="bg-gradient-to-r from-[#a3b18a] to-[#588157] dark:from-yellow-500 dark:to-amber-600 text-white dark:text-black text-[10px] font-extrabold px-10 py-1 shadow">QUALIFIED</div></div><div class="flex items-center gap-4">${avatar}<div class="min-w-0"><div class="text-xs font-medium text-[#6b8f79] dark:text-gray-400">${m.id}</div><div class="text-base font-semibold text-[#1b2b22] dark:text-white truncate">${m.name}</div>${rankBadge}<div class="mt-1 text-xs text-[#4c6b57] dark:text-gray-400">${m.city} • <span class="font-medium text-[#2f4f3a] dark:text-gray-300">${m.promo}</span></div></div></div><div class="mt-4 rounded-xl border border-[#dce6d8] dark:border-gray-700 bg-[#f9faf9] dark:bg-zinc-800 p-4"><div class="flex flex-wrap items-center gap-2 text-sm text-[#1b2b22] dark:text-gray-200"><i data-lucide="Trophy" class="h-4 w-4"></i><span>Hadiah:</span><span class="font-semibold">${m.reward}</span></div></div></div>`;
 }
 
 function getFilteredMembers() { let list = [...members]; const needle = state.searchQ.toLowerCase(); if (needle) list = list.filter(m => [m.name, m.city, m.rank, m.reward, m.promo, m.id, m.level_agen_stok].some(x => String(x).toLowerCase().includes(needle))); if (state.promoKey !== "All") list = list.filter(m => m.promo === state.promoKey); if (state.monthKey !== "All") list = list.filter(m => fmtMonthKey(new Date(m.qualifiedAt)) === state.monthKey); if (state.sortKey === "name") list.sort((a, b) => a.name.localeCompare(b.name)); else list.sort((a, b) => +new Date(b.qualifiedAt) - +new Date(a.qualifiedAt)); return list; }
@@ -73,11 +88,9 @@ function renderUI() { renderInfoBar(); renderControls(); renderMemberGrid(); }
 // =============================================================
 const uiModal = { overlay: document.getElementById('modal-overlay'), container: document.getElementById('modal-container') };
 
-// TOMBOL CLOSE (X) DIHAPUS DARI FUNGSI INI
 function renderModalContent(member, styleClass) {
     const photoContainerClass = member.photo ? 'border-4 border-white/20' : '';
     const photoHTML = member.photo ? `<img src="${member.photo}" alt="${member.name}"/>` : '';
-    
     const exclusiveEffectHTML = styleClass === 'rank-style-loyal-manager' ? '<div class="mesh-gradient-blob"></div>' : '';
 
     return `<div class="relative rounded-2xl p-6 text-center shadow-xl text-white shimmer-border-effect ${styleClass}" style="background-color: var(--rank-bg-color);">
@@ -90,8 +103,27 @@ function renderModalContent(member, styleClass) {
         <div class="relative z-10"><div id="modal-photo-container" class="mx-auto h-24 w-24 rounded-xl shadow-md bg-transparent ${photoContainerClass}">${photoHTML}</div><h3 id="modal-name" class="mt-4 text-2xl font-extrabold text-white">${member.name}</h3><div id="modal-rank" class="mt-1 text-sm font-bold uppercase tracking-wider" style="color: var(--rank-text-color);">${member.rank}</div><div id="modal-level-stok" class="mt-1 text-xs font-semibold uppercase text-gray-400">${member.level_agen_stok}</div><div id="modal-details" class="mt-6 bg-black/30 rounded-xl p-4 border border-white/10"><p class="text-sm text-gray-300">Berhasil meraih hadiah promo:</p><p id="modal-reward" class="text-lg font-bold" style="color: var(--rank-text-color);">${member.reward}</p><p class="mt-2 text-xs text-gray-400">Qualified pada <span id="modal-date" class="font-semibold text-gray-200">${formatDateID(member.qualifiedAt)}</span></p></div></div></div>`;
 }
 
-// LISTENER TOMBOL CLOSE DIHAPUS DARI FUNGSI INI
-window.openModal = function(memberId) { const member = members.find(m => m.id === memberId); if (!member) return; let style = 'default'; const promoType = (member.promo || "").toLowerCase(); if (promoType.includes('stok') || promoType.includes('agen')) { const level = (member.level_agen_stok || "").toLowerCase().replace(/\s+/g, '-'); style = level; } else { const rank = (member.rank || "").toLowerCase(); if (rank.includes('loyal')) style = 'loyal-manager'; else if (rank.includes('crown')) style = 'crown'; else if (rank.includes('diamond')) style = 'diamond'; else if (rank.includes('gold')) style = 'gold'; else if (rank.includes('manager')) style = 'manager'; } const styleClass = `rank-style-${style}`; uiModal.container.innerHTML = renderModalContent(member, styleClass); lucide.createIcons(); 
+// == PERUBAHAN 3: `openModal` sekarang menerima `uniqueRowId` ==
+// Kita ganti nama argumennya dari 'memberId' jadi 'uniqueRowId'
+window.openModal = function(uniqueRowId) { 
+    // Dan kita cari berdasarkan '_uniqueRowId'
+    const member = members.find(m => m._uniqueRowId === uniqueRowId); 
+    if (!member) return; 
+    let style = 'default'; 
+    const promoType = (member.promo || "").toLowerCase(); 
+    if (promoType.includes('stok') || promoType.includes('agen')) { 
+        const level = (member.level_agen_stok || "").toLowerCase().replace(/\s+/g, '-'); style = level; 
+    } else { 
+        const rank = (member.rank || "").toLowerCase(); 
+        if (rank.includes('loyal')) style = 'loyal-manager'; 
+        else if (rank.includes('crown')) style = 'crown'; 
+        else if (rank.includes('diamond')) style = 'diamond'; 
+        else if (rank.includes('gold')) style = 'gold'; 
+        else if (rank.includes('manager')) style = 'manager'; 
+    } 
+    const styleClass = `rank-style-${style}`; 
+    uiModal.container.innerHTML = renderModalContent(member, styleClass); 
+    lucide.createIcons(); 
     uiModal.overlay.classList.add('visible'); 
 };
 function closeModal() { uiModal.overlay.classList.remove('visible'); setTimeout(() => { uiModal.container.innerHTML = ''; }, 300); }
