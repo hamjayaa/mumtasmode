@@ -3,6 +3,13 @@ body { font-family: 'Inter', sans-serif; }
 .animate-gradient { background-size: 400% 400%; animation: gradientFlow 12s ease infinite; }
 
 /* ===== MODAL STYLES & ANIMATIONS ===== */
+@keyframes mesh-gradient-animation {
+    0% { transform: scale(1) translate(-50%, -50%); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25% { transform: scale(1.05) translate(-48%, -52%); border-radius: 40% 60% 70% 30% / 30% 60% 40% 70%; }
+    50% { transform: scale(1) translate(-50%, -50%); border-radius: 70% 30% 60% 40% / 70% 40% 30% 60%; }
+    75% { transform: scale(0.95) translate(-52%, -48%); border-radius: 30% 70% 40% 60% / 40% 70% 60% 30%; }
+    100% { transform: scale(1) translate(-50%, -50%); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
 @keyframes shimmer-new { 0% { transform: translateX(-150%) skewX(-30deg); opacity: 0.5; } 100% { transform: translateX(150%) skewX(-30deg); opacity: 0.5; } }
 @keyframes falling-stars { 0% { transform: translateY(-100%); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
 @keyframes border-shimmer-sweep { from { background-position: 200% 0; } to { background-position: -200% 0; } }
@@ -23,7 +30,6 @@ body { font-family: 'Inter', sans-serif; }
     top: -100%;
     width: 100%;
     height: 100%;
-    /* 10 stars defined (5x 1px, 5x 1.5px) - Lebih stabil */
     background-image:
         radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
         radial-gradient(1px, var(--sparkle-color) 50%, transparent 100%), radial-gradient(1.5px, var(--sparkle-color) 50%, transparent 100%),
@@ -33,18 +39,15 @@ body { font-family: 'Inter', sans-serif; }
         
     background-repeat: no-repeat;
     background-size: 1.5px 1.5px;
-    /* 10 initial random positions untuk menghindari overlap */
     background-position: 
         10% 10%, 25% 60%, 40% 90%, 55% 30%, 70% 5%, 85% 75%, 30% 20%, 65% 50%, 95% 80%, 5% 40%;
     animation: falling-stars 8s linear infinite;
 }
 
-/* Style untuk lapisan bintang kedua (lebih lambat, lebih kecil) */
 .effects-container .stars-2 {
-    animation-duration: 12s; /* Kecepatan lebih lambat */
-    animation-delay: -3s; /* Mulai dari titik yang berbeda */
-    transform: scale(0.7); /* Ukuran lebih kecil */
-    /* Posisi random yang berbeda dari lapisan pertama agar bintang tidak bertumpuk */
+    animation-duration: 12s; 
+    animation-delay: -3s; 
+    transform: scale(0.7); 
     background-position: 
         1% 95%, 21% 5%, 41% 35%, 58% 80%, 78% 15%, 11% 50%, 65% 25%, 85% 65%, 4% 30%, 30% 75%;
 }
@@ -52,6 +55,26 @@ body { font-family: 'Inter', sans-serif; }
 
 .effects-container .hero-twinkles { position: absolute; inset: 0; background-image: radial-gradient(circle, var(--sparkle-color) 1.5px, transparent 1.5px), radial-gradient(circle, var(--sparkle-color) 1px, transparent 1px); background-repeat: no-repeat; background-size: 2px 2px; background-position: 15% 30%, 80% 75%; animation: twinkle 4s ease-in-out infinite; }
 .effects-container .shimmer { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, var(--shimmer-color) 50%, transparent 80%); animation: shimmer-new 4s ease-in-out infinite; }
+
+/* EFEK MESH GRADIENT BLOB EKSKLUSIF */
+.effects-container .mesh-gradient-blob {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%; 
+    height: 150%;
+    background: radial-gradient(at 0% 0%, #4a00e0, transparent), 
+                radial-gradient(at 100% 0%, #8e2de2, transparent), 
+                radial-gradient(at 0% 100%, #da22ff, transparent), 
+                radial-gradient(at 100% 100%, #21d4fd, transparent); 
+    background-size: 100% 100%;
+    filter: blur(80px); 
+    opacity: 0.6; 
+    animation: mesh-gradient-animation 15s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0; 
+}
+
 
 .shimmer-border-effect { position: relative; }
 .shimmer-border-effect::before {
@@ -68,6 +91,22 @@ body { font-family: 'Inter', sans-serif; }
 /* --- UNIFIED RANK STYLES --- */
 .rank-style-default { --sparkle-color: #e5e7eb; --shimmer-color: rgba(209, 213, 219, 0.1); --rank-text-color: #9ca3af; --rank-border-color: #6b7280; --rank-bg-color: rgba(55, 65, 81, 0.5); }
 .rank-style-manager { --sparkle-color: #bbf7d0; --shimmer-color: rgba(134, 239, 172, 0.15); --rank-text-color: #86efac; --rank-border-color: #4ade80; --rank-bg-color: rgba(22, 101, 52, 0.5); }
+
+/* STYLE UNTUK LOYAL MANAGER */
+.rank-style-loyal-manager {
+    --sparkle-color: transparent; 
+    --shimmer-color: transparent; 
+    --rank-text-color: #a78bfa; 
+    --rank-border-color: #c4b5fd; 
+    --rank-bg-color: #1a0033; 
+}
+.rank-style-loyal-manager .effects-container .stars,
+.rank-style-loyal-manager .effects-container .stars-2,
+.rank-style-loyal-manager .effects-container .hero-twinkles,
+.rank-style-loyal-manager .effects-container .shimmer {
+    display: none;
+}
+
 .rank-style-gold { --sparkle-color: #fde68a; --shimmer-color: rgba(252, 211, 77, 0.2); --rank-text-color: #fcd34d; --rank-border-color: #fbbf24; --rank-bg-color: rgba(146, 105, 12, 0.5); }
 .rank-style-diamond { --sparkle-color: #a5f3fc; --shimmer-color: rgba(103, 232, 249, 0.2); --rank-text-color: #7dd3fc; --rank-border-color: #38bdf8; --rank-bg-color: rgba(14, 116, 144, 0.5); }
 .rank-style-crown { --sparkle-color: #f472b6; --shimmer-color: rgba(244, 114, 182, 0.2); --rank-text-color: #f472b6; --rank-border-color: #c026d3; --rank-bg-color: rgba(134, 25, 143, 0.5); }
