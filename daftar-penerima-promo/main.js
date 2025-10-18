@@ -38,10 +38,8 @@ async function fetchData() {
         const missing = Object.entries(idx).filter(([k, v]) => ["id", "name", "qualifiedAt"].includes(k) && v === -1).map(([k]) => k);
         if (missing.length) throw new Error(`Kolom wajib hilang: ${missing.join(", ")}`);
         
-        // == PERUBAHAN 1: Menambahkan `_uniqueRowId` ==
-        // Kita tambahkan 'index' (0, 1, 2, ...) sebagai ID unik internal
         members = rows.slice(1).map((cols, index) => ({ 
-            _uniqueRowId: index, // Ini ID unik barunya
+            _uniqueRowId: index, 
             id: cols[idx.id] || "", 
             name: cols[idx.name] || "", 
             city: cols[idx.city] || "", 
@@ -72,8 +70,6 @@ function renderMemberCard(m) {
     const avatar = m.photo ? `<img src="${m.photo}" alt="${m.name}" class="h-20 w-20 shrink-0 rounded-xl object-cover"/>` : `<div class="h-20 w-20 shrink-0 rounded-xl bg-gradient-to-br from-[#a3b18a] via-[#588157] to-[#3a5a40] dark:from-yellow-500 dark:to-amber-600 text-white dark:text-black grid place-items-center text-lg font-extrabold">${initials(m.name)}</div>`;
     const rankBadge = m.rank ? `<div class="mt-1 inline-flex items-center gap-1 rounded-full border border-[#a3b18a] dark:border-yellow-600/50 bg-[#dde6d6] dark:bg-yellow-900/30 px-2 py-0.5 text-[11px] font-bold tracking-wide text-[#2f4f3a] dark:text-yellow-300">${rankIcon(m.rank)} <span class="uppercase">${m.rank}</span></div>` : '';
     
-    // == PERUBAHAN 2: `openModal` sekarang pakai `m._uniqueRowId` ==
-    // Kita gak lagi pakai m.id, tapi pakai ID unik baris
     return `<div onclick="openModal(${m._uniqueRowId})" class="member-card relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 border border-[#dce6d8] dark:border-gray-700 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all opacity-0 translate-y-4"><div class="absolute right-[-40px] top-[15px] rotate-45"><div class="bg-gradient-to-r from-[#a3b18a] to-[#588157] dark:from-yellow-500 dark:to-amber-600 text-white dark:text-black text-[10px] font-extrabold px-10 py-1 shadow">QUALIFIED</div></div><div class="flex items-center gap-4">${avatar}<div class="min-w-0"><div class="text-xs font-medium text-[#6b8f79] dark:text-gray-400">${m.id}</div><div class="text-base font-semibold text-[#1b2b22] dark:text-white truncate">${m.name}</div>${rankBadge}<div class="mt-1 text-xs text-[#4c6b57] dark:text-gray-400">${m.city} • <span class="font-medium text-[#2f4f3a] dark:text-gray-300">${m.promo}</span></div></div></div><div class="mt-4 rounded-xl border border-[#dce6d8] dark:border-gray-700 bg-[#f9faf9] dark:bg-zinc-800 p-4"><div class="flex flex-wrap items-center gap-2 text-sm text-[#1b2b22] dark:text-gray-200"><i data-lucide="Trophy" class="h-4 w-4"></i><span>Hadiah:</span><span class="font-semibold">${m.reward}</span></div></div></div>`;
 }
 
@@ -93,20 +89,17 @@ function renderModalContent(member, styleClass) {
     const photoHTML = member.photo ? `<img src="${member.photo}" alt="${member.name}"/>` : '';
     const exclusiveEffectHTML = styleClass === 'rank-style-loyal-manager' ? '<div class="mesh-gradient-blob"></div>' : '';
 
-    return `<div class="relative rounded-2xl p-6 text-center shadow-xl text-white shimmer-border-effect ${styleClass}" style="background-color: var(--rank-bg-color);">
+    // INI YANG BENAR: `style="...background-color..."` DIHAPUS
+    return `<div class="relative rounded-2xl p-6 text-center shadow-xl text-white shimmer-border-effect ${styleClass}">
         <div class="effects-container">
             <div class="stars"></div>
-            <div class="stars stars-2"></div> <div class="shimmer"></div>
-            <div class="hero-twinkles"></div>
+            <div class="stars stars-2"></div>
             ${exclusiveEffectHTML}
         </div>
         <div class="relative z-10"><div id="modal-photo-container" class="mx-auto h-24 w-24 rounded-xl shadow-md bg-transparent ${photoContainerClass}">${photoHTML}</div><h3 id="modal-name" class="mt-4 text-2xl font-extrabold text-white">${member.name}</h3><div id="modal-rank" class="mt-1 text-sm font-bold uppercase tracking-wider" style="color: var(--rank-text-color);">${member.rank}</div><div id="modal-level-stok" class="mt-1 text-xs font-semibold uppercase text-gray-400">${member.level_agen_stok}</div><div id="modal-details" class="mt-6 bg-black/30 rounded-xl p-4 border border-white/10"><p class="text-sm text-gray-300">Berhasil meraih hadiah promo:</p><p id="modal-reward" class="text-lg font-bold" style="color: var(--rank-text-color);">${member.reward}</p><p class="mt-2 text-xs text-gray-400">Qualified pada <span id="modal-date" class="font-semibold text-gray-200">${formatDateID(member.qualifiedAt)}</span></p></div></div></div>`;
 }
 
-// == PERUBAHAN 3: `openModal` sekarang menerima `uniqueRowId` ==
-// Kita ganti nama argumennya dari 'memberId' jadi 'uniqueRowId'
 window.openModal = function(uniqueRowId) { 
-    // Dan kita cari berdasarkan '_uniqueRowId'
     const member = members.find(m => m._uniqueRowId === uniqueRowId); 
     if (!member) return; 
     let style = 'default'; 
