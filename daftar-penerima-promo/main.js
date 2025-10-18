@@ -17,7 +17,10 @@ const fmtMonthKey = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padSta
 const toMonthLabelID = (key) => key === "All" ? "Semua Bulan" : `${MONTHS_ID[parseInt(key.split("-")[1], 10) - 1]} ${key.split("-")[0]}`;
 const formatDateID = (dateStr) => { const d = new Date(dateStr); return isNaN(d.getTime()) ? dateStr : `${d.getDate()} ${MONTHS_ID[d.getMonth()]} ${d.getFullYear()}`; };
 const initials = (name) => (name || "").trim().split(/\s+/).filter(Boolean).map((s) => s[0]).join("").slice(0, 2).toUpperCase();
-function rankIcon(rank) { const r = (rank || "").toLowerCase(); let i = 'Star'; if (r.includes("crown")) i = 'Crown'; else if (r.includes("diamond")) i = 'Gem'; else if (r.includes("gold")) i = 'Trophy'; return `<i data-lucide="${i}" class="h-4 w-4"></i>`; }
+
+// ICON 'gold' DIGANTI JADI 'Cuboid'
+function rankIcon(rank) { const r = (rank || "").toLowerCase(); let i = 'Star'; if (r.includes("loyal")) i = 'Medal'; else if (r.includes("crown")) i = 'Crown'; else if (r.includes("diamond")) i = 'Gem'; else if (r.includes("gold")) i = 'Cuboid'; return `<i data-lucide="${i}" class="h-4 w-4"></i>`; }
+
 function parseCSV(text) { const rows = []; let row = []; let cell = ""; let inQuotes = false; for (let i = 0; i < text.length; i++) { const ch = text[i]; const next = text[i + 1]; if (ch === '"') { if (inQuotes && next === '"') { cell += '"'; i++; } else { inQuotes = !inQuotes; } } else if (ch === "," && !inQuotes) { row.push(cell); cell = ""; } else if ((ch === "\n" || ch === "\r") && !inQuotes) { if (cell !== "" || row.length) { row.push(cell); cell = ""; } if (row.length) { rows.push(row); row = []; } if (ch === "\r" && next === "\n") i++; } else { cell += ch; } } if (cell !== "" || row.length) row.push(cell); if (row.length) rows.push(row); return rows.map((r) => r.map((c) => c.replace(/^\uFEFF/, "").trim())); }
 
 // =============================================================
@@ -70,20 +73,27 @@ function renderUI() { renderInfoBar(); renderControls(); renderMemberGrid(); }
 // =============================================================
 const uiModal = { overlay: document.getElementById('modal-overlay'), container: document.getElementById('modal-container') };
 
+// TOMBOL CLOSE (X) DIHAPUS DARI FUNGSI INI
 function renderModalContent(member, styleClass) {
     const photoContainerClass = member.photo ? 'border-4 border-white/20' : '';
     const photoHTML = member.photo ? `<img src="${member.photo}" alt="${member.name}"/>` : '';
+    
+    const exclusiveEffectHTML = styleClass === 'rank-style-loyal-manager' ? '<div class="mesh-gradient-blob"></div>' : '';
 
     return `<div class="relative rounded-2xl p-6 text-center shadow-xl text-white shimmer-border-effect ${styleClass}" style="background-color: var(--rank-bg-color);">
         <div class="effects-container">
             <div class="stars"></div>
             <div class="stars stars-2"></div> <div class="shimmer"></div>
             <div class="hero-twinkles"></div>
+            ${exclusiveEffectHTML}
         </div>
-        <div class="relative z-10"><button id="modal-close-btn" class="absolute top-2 right-2 p-2 text-gray-400 hover:text-white z-20"><i data-lucide="X" class="h-6 w-6"></i></button><div id="modal-photo-container" class="mx-auto h-24 w-24 rounded-xl shadow-md bg-transparent ${photoContainerClass}">${photoHTML}</div><h3 id="modal-name" class="mt-4 text-2xl font-extrabold text-white">${member.name}</h3><div id="modal-rank" class="mt-1 text-sm font-bold uppercase tracking-wider" style="color: var(--rank-text-color);">${member.rank}</div><div id="modal-level-stok" class="mt-1 text-xs font-semibold uppercase text-gray-400">${member.level_agen_stok}</div><div id="modal-details" class="mt-6 bg-black/30 rounded-xl p-4 border border-white/10"><p class="text-sm text-gray-300">Berhasil meraih hadiah promo:</p><p id="modal-reward" class="text-lg font-bold" style="color: var(--rank-text-color);">${member.reward}</p><p class="mt-2 text-xs text-gray-400">Qualified pada <span id="modal-date" class="font-semibold text-gray-200">${formatDateID(member.qualifiedAt)}</span></p></div></div></div>`;
+        <div class="relative z-10"><div id="modal-photo-container" class="mx-auto h-24 w-24 rounded-xl shadow-md bg-transparent ${photoContainerClass}">${photoHTML}</div><h3 id="modal-name" class="mt-4 text-2xl font-extrabold text-white">${member.name}</h3><div id="modal-rank" class="mt-1 text-sm font-bold uppercase tracking-wider" style="color: var(--rank-text-color);">${member.rank}</div><div id="modal-level-stok" class="mt-1 text-xs font-semibold uppercase text-gray-400">${member.level_agen_stok}</div><div id="modal-details" class="mt-6 bg-black/30 rounded-xl p-4 border border-white/10"><p class="text-sm text-gray-300">Berhasil meraih hadiah promo:</p><p id="modal-reward" class="text-lg font-bold" style="color: var(--rank-text-color);">${member.reward}</p><p class="mt-2 text-xs text-gray-400">Qualified pada <span id="modal-date" class="font-semibold text-gray-200">${formatDateID(member.qualifiedAt)}</span></p></div></div></div>`;
 }
 
-window.openModal = function(memberId) { const member = members.find(m => m.id === memberId); if (!member) return; let style = 'default'; const promoType = (member.promo || "").toLowerCase(); if (promoType.includes('stok') || promoType.includes('agen')) { const level = (member.level_agen_stok || "").toLowerCase().replace(/\s+/g, '-'); style = level; } else { const rank = (member.rank || "").toLowerCase(); if (rank.includes('crown')) style = 'crown'; else if (rank.includes('diamond')) style = 'diamond'; else if (rank.includes('gold')) style = 'gold'; else if (rank.includes('manager')) style = 'manager'; } const styleClass = `rank-style-${style}`; uiModal.container.innerHTML = renderModalContent(member, styleClass); lucide.createIcons(); document.getElementById('modal-close-btn').onclick = closeModal; uiModal.overlay.classList.add('visible'); };
+// LISTENER TOMBOL CLOSE DIHAPUS DARI FUNGSI INI
+window.openModal = function(memberId) { const member = members.find(m => m.id === memberId); if (!member) return; let style = 'default'; const promoType = (member.promo || "").toLowerCase(); if (promoType.includes('stok') || promoType.includes('agen')) { const level = (member.level_agen_stok || "").toLowerCase().replace(/\s+/g, '-'); style = level; } else { const rank = (member.rank || "").toLowerCase(); if (rank.includes('loyal')) style = 'loyal-manager'; else if (rank.includes('crown')) style = 'crown'; else if (rank.includes('diamond')) style = 'diamond'; else if (rank.includes('gold')) style = 'gold'; else if (rank.includes('manager')) style = 'manager'; } const styleClass = `rank-style-${style}`; uiModal.container.innerHTML = renderModalContent(member, styleClass); lucide.createIcons(); 
+    uiModal.overlay.classList.add('visible'); 
+};
 function closeModal() { uiModal.overlay.classList.remove('visible'); setTimeout(() => { uiModal.container.innerHTML = ''; }, 300); }
 
 // =============================================================
@@ -126,6 +136,7 @@ window.handleMonthChange = (value) => { state.monthKey = value; renderMemberGrid
 window.handleSortChange = (value) => { state.sortKey = value; renderMemberGrid(); renderControls(); };
 window.handlePromoChange = (promo) => { state.promoKey = promo; renderControls(); renderMemberGrid(); };
 function runHeroAnimation() { const h1=document.getElementById('hero-h1'),s=document.getElementById('hero-span'),p=document.getElementById('hero-p'); if(!h1||!s||!p)return; h1.style.transition='opacity 1s ease-out,transform 1s ease-out'; s.style.transition='opacity .8s,transform .8s'; p.style.transition='opacity .7s,transform .7s'; setTimeout(()=>{h1.style.opacity=1;h1.style.transform='translateY(0) scale(1)'},50); setTimeout(()=>{s.style.opacity=1;s.style.transform='translateY(0)'},250); setTimeout(()=>{p.style.opacity=1;p.style.transform='translateY(0)'},550); }
+
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('darkMode') === 'true';
     applyTheme(savedTheme);
