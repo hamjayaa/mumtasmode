@@ -1,0 +1,182 @@
+:root{
+  --ink:#1a1d1a;
+  --sage:#4FBA39;
+  --sage-dark:#3A902A;
+  --photo-bg:#0e1a0c;
+  --photo-ink:#1A4D1A;
+  --neon-glow-light:rgba(79,186,57,.4);
+  --card-bg:#f9f9f9;
+
+  /* === GANTI KE LINK CLOUDINARY KAMU === */
+  --lm-bg: url('./assets/emas.jpg');   /* LM */
+  --umrah-bg: url('./assets/kabah3.jpg');  /* Umrah */
+
+  /* tinggi header diisi via JS */
+  --header-h:64px;
+
+  /* Footer (parallax + center tweak) */
+  --footer-bg:#F1FBEF;
+  --footer-min: 130vh;                  
+  --footer-links-extra: 270px;          
+  --footer-content-base: 120px;         
+  --footer-parallax-depth-giant: 34;    
+  --footer-parallax-depth-content: 140; 
+}
+
+/* Base - PERBAIKAN UTAMA DI SINI (overflow-x: hidden) */
+html,body{
+  height:100%; margin:0; padding:0; background:#fff; color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+  overflow-x: hidden; /* MENCEGAH SCROLL HORIZONTAL DI SELURUH HALAMAN */
+}
+header{
+  position:fixed; top:0; left:0; right:0; z-index:60;
+  background:rgba(255,255,255,.9); backdrop-filter:blur(10px); border-bottom:1px solid #eaeaea;
+}
+main{
+  height:100vh; overflow-y:scroll; 
+  /* Pastikan overflow-x tidak diatur di sini agar tidak konflik dengan body/html */
+  scroll-snap-type:y proximity; scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch; overscroll-behavior-y:contain; 
+}
+main::-webkit-scrollbar{width:0;height:0}
+
+/* Anchor stop tepat di bawah header */
+#hero,#horizontal-wrapper,#promo-peringkat,#promo-stok,#go-loyal-royal,#footer{scroll-margin-top:var(--header-h)}
+
+/* Sections */
+.v-section{height:100vh; scroll-snap-align:start; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden}
+.content{display:flex; flex-direction:column; align-items:center; text-align:center; max-width:1200px; width:100%; padding:0 1.5rem; position:relative; z-index:10}
+.title{font-size:1.5rem; margin-bottom:1rem; font-weight:700; color:#22352b}
+.item{font-size:1.125rem; line-height:1.6; color:var(--photo-ink)}
+
+/* SECTION 2 – Horizontal */
+#horizontal-wrapper{position:relative; height:200vh; width:100%}
+#promo-pinning{position:sticky; top:0; height:100vh; width:100%; overflow:hidden;} /* Tambahkan overflow:hidden */
+#promo-pribadi{height:100%; width:300%; display:flex; flex-wrap:nowrap; will-change:transform}
+.h-panel{flex:0 0 33.3333%; height:100vh; display:flex; justify-content:center; align-items:flex-start; padding-top:25vh; position:relative}
+.photo-group{position:absolute; top:50vh; left:0; right:0; height:100vh; display:flex; justify-content:center; align-items:flex-start; pointer-events:none; overflow:hidden;} /* Tambahkan overflow:hidden */
+
+/* Konfigurasi BASE untuk Parallax Asset di Section 2 */
+.parallax-asset{
+  position:absolute; will-change:transform; transition:transform .1s linear;
+  width: var(--w, 45rem); 
+  left: var(--lx, 50%);  
+}
+
+/* SECTION 3 – Peringkat */
+.parallax-bg-wrapper{position:relative; background-color:var(--photo-bg)}
+#promo-peringkat{position:relative; z-index:1}
+#promo-peringkat .sticky-column{position:sticky; top:10rem; height:calc(100vh - 10rem)}
+.image-rotator-wrapper{width:100%; height:100%; perspective:2000px}
+.image-rotator{position:relative; width:100%; height:100%; transform-style:preserve-3d}
+.image-card{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; backface-visibility:hidden;
+  transition:transform .7s cubic-bezier(.25,1,.5,1), opacity .5s ease; transform:rotateY(90deg); opacity:0}
+#img-gold.active{transform:rotateY(10deg) rotateZ(-4deg); opacity:1}
+#img-diamond.active{transform:rotateY(-8deg) rotateX(5deg); opacity:1}
+#img-crown.active{transform:rotateY(12deg) rotateX(-2deg); opacity:1}
+.image-card img{width:100%; height:100%; max-height:65vh; object-fit:cover; border-radius:1.5rem; box-shadow:0 25px 50px -12px rgba(0,0,0,.25)}
+
+/* SECTION 4 – Agen Stok */
+#promo-stok{background-color:var(--ink); padding:8rem 0}
+.promo-grid{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:1.5rem; max-width:1200px; margin:0 auto}
+.promo-title-block{grid-column:1/2; grid-row:1/2; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; color:#fff; padding-left:1rem; text-align:left}
+.promo-card{aspect-ratio:1/1; overflow:hidden; position:relative; border-radius:1.5rem; transition:transform .3s, box-shadow .3s; cursor:pointer; background:var(--card-bg)}
+.promo-card:nth-child(2){grid-column:2/3; grid-row:1/2; aspect-ratio:6/4}
+.promo-card:nth-child(3){grid-column:1/2; grid-row:2/3; aspect-ratio:6/4}
+.promo-card:nth-child(4){grid-column:2/3; grid-row:2/3; aspect-ratio:6/4}
+.card-image-wrapper{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transition:transform .6s, filter .6s; z-index:20}
+.card-image-wrapper img{width:100%; height:100%; object-fit:cover}
+.card-overlay{position:absolute; inset:0; background:rgba(26,29,26,.9); opacity:0; transition:opacity .5s; z-index:30; padding:1rem; color:#fff; text-align:left}
+.promo-card:hover .card-image-wrapper{transform:scale(1.05); filter:blur(5px)}
+.promo-card:hover .card-overlay{opacity:1}
+.card-overlay .text-xl{font-size:1rem}.card-overlay .text-4xl{font-size:1.5rem}.card-overlay .text-5xl{font-size:2rem}.card-overlay .text-2xl{font-size:1.125rem}.card-overlay .text-lg{font-size:.875rem}
+.card-overlay .overlay-text{opacity:0; transform:translateY(10px); transition:opacity .4s ease .1s, transform .4s ease .1s}
+.promo-card:hover .card-overlay .overlay-text{opacity:1; transform:translateY(0)}
+
+/* ===== SECTION 5 – Loyal Royal (BG via Cloudinary vars) ===== */
+#go-loyal-royal{height:320vh; position:relative; scroll-snap-align:start; z-index:5;} 
+#royal-sticky-wrapper{position:sticky; top:var(--header-h); height:calc(100vh - var(--header-h)); overflow:hidden; z-index:10; background:#000}
+#reward-bg-container{position:absolute; inset:0; width:100%; height:200%; display:flex; flex-direction:column; will-change:transform; transform:translateY(0%); z-index:1;}
+.reward-bg-item{width:100%; height:50%; background-size:cover; background-position:center; background-repeat:no-repeat}
+.reward-bg-item:nth-child(1){ background-image: var(--lm-bg); }
+.reward-bg-item:nth-child(2){ background-image: var(--umrah-bg); }
+.royal-shade{position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.45) 50%, rgba(0,0,0,.30))}
+#royal-title{position:absolute; top:0; padding:5rem 1.5rem 0; z-index:3; text-align:center; width:100%; max-width:1000px; left:50%; transform:translateX(-50%)}
+#royal-title h2{color:#fff} #royal-title h2 span{color:var(--sage)}
+#royal-scroll-content{position:relative; width:100%; height:auto; z-index:3}
+.reward-text-block{position:absolute; top:65%; left:50%; transform:translate(-50%,-50%); width:100%; max-width:700px; padding:0 1.5rem; text-align:center; color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.45); opacity:0; transition:opacity .4s ease; pointer-events:none; z-index:3;}
+.reward-text-block.active{opacity:1}
+.reward-text-block h3{font-size:clamp(2rem,5vw,3.5rem); font-weight:800; margin-bottom:.5rem; color:var(--sage)}
+.reward-text-block .subtitle{font-size:clamp(1.1rem,2.5vw,1.5rem); font-weight:600; margin-bottom:1.25rem; color:#fff}
+.reward-text-block ul{margin-top:.5rem; list-style:none; padding:0; text-align:center; font-size:1.125rem; font-weight:500}
+.reward-text-block li{margin-bottom:.4rem; color:#fff; padding:0 .5rem}
+.reward-text-block li span{font-weight:700; color:var(--sage)}
+.reward-trigger-space:nth-child(1){min-height:70vh}
+.reward-trigger-space:nth-child(2){min-height:100vh}
+.royal-end-pad{height:140vh} 
+@media (max-width:768px){
+  #go-loyal-royal{height:300vh}
+  .reward-trigger-space:nth-child(1){min-height:50vh}
+  .reward-trigger-space:nth-child(2){min-height:80vh}
+  .royal-end-pad{height:140vh}
+  #royal-title h2{font-size:3rem}
+  .reward-text-block h3{font-size:2rem}
+  .reward-text-block .subtitle{font-size:1.2rem}
+}
+
+/* UI kecil */
+.progbar{position:absolute; left:0; bottom:0; height:3px; width:0%; background:linear-gradient(90deg,var(--sage-dark),var(--sage))}
+.cursor{position:fixed; top:0; left:0; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle,var(--neon-glow-light),rgba(79,186,57,.15) 60%,transparent 70%); filter:blur(20px); mix-blend-mode:multiply; pointer-events:none; z-index:4; transform:translate(-50%,-50%)}
+.magnet{display:inline-block; position:relative; transition:transform .2s cubic-bezier(.22,1,.36,1)}
+.kinetic span{display:inline-block; transition:transform .15s cubic-bezier(.22,1,.36,1)}
+.countdown{margin-top:24px; display:inline-flex; align-items:stretch; gap:12px; padding:10px 12px; border-radius:16px; background:rgba(255,255,255,.6); backdrop-filter:blur(6px); border:1px solid #eaeaea}
+.cd-card{min-width:90px; padding:14px 16px; border-radius:14px; background:#fff; border:1px solid #e6e6e6; box-shadow:0 8px 20px rgba(0,0,0,.06); text-align:center}
+.cd-num{font-weight:800; font-size:clamp(24px,5.6vw,44px); line-height:1; color:var(--ink); letter-spacing:.03em}
+.cd-label{font-size:12px; margin-top:6px; color:var(--photo-ink); letter-spacing:.12em; text-transform:uppercase}
+.cd-sep{align-self:center; font-weight:700; color:var(--sage); opacity:.9}
+.anim{opacity:0; transform:translateZ(0); will-change:transform,opacity; transition-timing-function:cubic-bezier(.22,1,.36,1); transition-property:opacity,transform; transition-delay:var(--d,0s)}
+.anim.in-view{opacity:1}
+.fm-rise{transform:translateY(36px); transition-duration:.8s}
+.fm-rise.in-view{transform:translateY(0)}
+.fm-clip{clip-path:inset(0 0 100% 0 round 6px); transition-duration:.9s}
+.fm-clip.in-view{clip-path:inset(-20px 0 -20px 0 round 6px)}
+.fm-blurscale{opacity:0; filter:blur(10px); transform:translateY(12px) scale(.96); transition-duration:.9s; transition-property:opacity,transform,filter}
+.fm-blurscale.in-view{opacity:1; filter:blur(0); transform:translateY(var(--py,0px)) scale(1)}
+
+/* ===== FOOTER (single, PARALLAX + deeper center) ===== */
+#footer{
+  position:relative; scroll-snap-align:start; background:var(--footer-bg);
+  min-height:var(--footer-min); padding:14rem 1.5rem 8rem; overflow:hidden;
+  z-index:70; 
+}
+#footer .footer-inner{
+  max-width:1200px; margin:0 auto; text-align:center; position:relative; z-index:2;
+  transform: translateY(calc(var(--footer-content-base) + var(--fiY, 0px))); 
+  will-change: transform;
+}
+#footer-giant{
+  position:absolute; left:50%; bottom:-1rem;
+  transform: translate(-50%, var(--fgY, 0%)); will-change: transform;
+  font-weight:900; letter-spacing:-.05em; line-height:.9;
+  font-size: clamp(16rem, 26vw, 42rem);
+  color: rgba(79,186,57,.08); white-space:nowrap; user-select:none; pointer-events:none; z-index:1;
+}
+#footer .btns{margin-top:2rem; display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+#footer .btn-primary{background:var(--sage); border:1px solid var(--sage); color:#fff}
+#footer .btn-primary:hover{background:var(--sage-dark)}
+#footer .btn-ghost{border:1px solid var(--sage); color:var(--sage)}
+#footer .btn-ghost:hover{background:var(--sage); color:#fff}
+.btn{font-weight:700; padding:.9rem 1.6rem; border-radius:14px; transition:.25s}
+
+#footer .footer-links{
+  margin-top: calc(2rem + var(--footer-links-extra)); 
+  display:flex; gap:1rem; flex-wrap:wrap; justify-content:center
+}
+#footer .footer-links a{font-weight:600; color:#1f2937; text-decoration:none}
+#footer .footer-links a:hover{color:#3A902A}
+#footer .footer-utility{margin-top:1rem; color:#6b7280; font-size:.95rem}
+
+@media (min-width:1536px){
+  :root{ --footer-min: 150vh; } 
+}
