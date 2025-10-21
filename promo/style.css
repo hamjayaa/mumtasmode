@@ -8,8 +8,8 @@
   --card-bg:#f9f9f9;
 
   /* === GANTI KE LINK CLOUDINARY KAMU === */
-  --lm-bg: url('./assets/emas.jpg');   /* LM */
-  --umrah-bg: url('./assets/kabah3.jpg');  /* Umrah */
+  --lm-bg: url('https://res.cloudinary.com/doqzgozyt/image/upload/v1761029496/emas_niaird.jpg');   /* LM */
+  --umrah-bg: url('https://res.cloudinary.com/doqzgozyt/image/upload/v1761029619/mekah1_tjcwmf.jpg');  /* Umrah */
 
   /* tinggi header diisi via JS */
   --header-h:64px;
