@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team Up, Cash Up!</title>
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="fixed inset-x-0 z-50 flex justify-between items-center px-6 py-4">
+    <div class="text-lg font-bold tracking-widest text-[var(--sage)]">MUMTAS</div>
+    <nav class="hidden md:flex gap-6 text-[var(--sage-dark)]">
+      <a href="#hero" class="hover:text-[var(--sage)]">Promo</a>
+      <a href="#horizontal-wrapper" class="hover:text-[var(--sage)]">Pribadi</a>
+      <a href="#promo-peringkat" class="hover:text-[var(--sage)]">Peringkat</a>
+      <a href="#promo-stok" class="hover:text-[var(--sage)]">Agen Stok</a>
+      <a href="#go-loyal-royal" class="hover:text-[var(--sage)]">Loyal Manager</a>
+    </nav>
+    <div id="progbar" class="progbar"></div>
+  </header>
+
+  <div class="cursor" id="cursor"></div>
+  <main id="spa">
+    <section id="hero" class="v-section">
+      <div id="heroTitle" class="text-center anim fm-blurscale" style="--d:.05s">
+        <p class="mb-3 uppercase tracking-[.22em] text-[var(--sage)]">Promo</p>
+        <h1 class="text-5xl md:text-7xl lg:text-[8rem] font-extrabold leading-[0.9] text-[var(--ink)]">
+          Team Up,<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--sage-dark)] to-[var(--sage)]">Cash Up!</span>
+        </h1>
+        <p class="mt-5 text-lg md:text-2xl text-[var(--ink)]/80 max-w-2xl mx-auto">
+          Periode <span class="font-semibold text-[var(--ink)]">September 2025</span> s/d <span class="font-semibold text-[var(--ink)]">Agustus 2026</span>.
+        </p>
+        <div class="countdown" id="countdown" aria-label="Countdown Promo">
+          <div class="cd-card"><div class="cd-num" id="cd-days">000</div><div class="cd-label">Hari</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-card"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Jam</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-card"><div class="cd-num" id="cd-min">00</div><div class="cd-label">Menit</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-card"><div class="cd-num" id="cd-sec">00</div><div class="cd-label">Detik</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="horizontal-wrapper">
+      <div id="promo-pinning">
+        <h2 class="absolute top-24 left-1/2 -translate-x-1/2 text-5xl font-extrabold text-[var(--sage)]">Personal<span class="text-black"> Booster</span></h2>
+        <div id="promo-pribadi">
+          <div class="h-panel">
+            <div class="content max-w-xl">
+              <div class="title anim fm-clip text-2xl font-bold" style="--d:.15s">Promo Pribadi 1</div>
+              <p class="item anim fm-rise text-xl mt-3" style="--d:.3s">Hadiah: Tumbler Eksklusif Mumtas</p>
+              <p class="item anim fm-rise text-base text-[var(--sage)] font-semibold" style="--d:.4s">Syarat: TUPO Pribadi 300 poin selama 2 bulan berturut-turut.</p>
+            </div>
+            <div class="photo-group">
+              <div class="absolute z-10 parallax-asset" 
+                   style="--w:45rem; --lx:50%; --ty:0.1rem;">
+                <img src="./assets/white tumbler.png" alt="Tumbler" class="drop-shadow-xl rounded-2xl">
+              </div>
+              <div class="absolute parallax-asset" 
+                   style="--w:30rem; --lx:35%; --ty:4rem;">
+                <img src="./assets/pink tumbler.png" alt="Tumbler" class="drop-shadow-xl rounded-2xl">
+              </div>
+              <div class="absolute parallax-asset" 
+                   style="--w:30rem; --lx:65%; --ty:4rem;">
+                <img src="./assets/grey tumbler.png" alt="Tumbler" class="drop-shadow-xl rounded-2xl">
+              </div>
+            </div>
+          </div>
+          <div class="h-panel">
+            <div class="content max-w-xl">
+              <div class="title anim fm-clip text-2xl font-bold" style="--d:.15s">Promo Pribadi 2</div>
+              <p class="item anim fm-rise text-xl mt-3" style="--d:.3s">Hadiah: Cashback Rp 1,500,000</p>
+              <p class="item anim fm-rise text-base text-[var(--sage)] font-semibold" style="--d:.4s">Syarat: TUPO 400 poin (Mumtas Mie) selama 12 bulan (berlaku akumulasi).</p>
+            </div>
+            <div class="photo-group">
+              <div class="relative z-10 parallax-asset" 
+                   style="--w:45rem; --lx:50%; --ty:1rem;">
+                <img src="./assets/uang 1.png" alt="Cashback 1.5 Juta" class="drop-shadow-2xl rounded-lg">
+              </div>
+            </div>
+          </div>
+          <div class="h-panel">
+            <div class="content max-w-xl">
+              <div class="title anim fm-clip text-2xl font-bold" style="--d:.15s">Promo Pribadi 3</div>
+              <p class="item anim fm-rise text-xl mt-3" style="--d:.3s">Hadiah: Cashback Rp 2,500,000</p>
+              <p class="item anim fm-rise text-base text-[var(--sage)] font-semibold" style="--d:.4s">Syarat: TUPO 600 poin selama 12 bulan (berlaku akumulasi).</p>
+            </div>
+            <div class="photo-group">
+              <div class="relative z-10 parallax-asset" 
+                   style="--w:50rem; --lx:70%; --ty:1rem;">
+                <img src="./assets/uang 1.png" alt="Cashback 2.5 Juta" class="drop-shadow-2xl rounded-lg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="parallax-bg-wrapper">
+      <section id="promo-peringkat" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 px-6">
+          <div class="sticky-column">
+            <div class="image-rotator-wrapper">
+              <div class="image-rotator">
+                <div id="img-gold" class="image-card active">
+                  <img src="./assets/emas2.jpg" alt="LM 2 Juta">
+                </div>
+                <div id="img-diamond" class="image-card">
+                  <img src="./assets/hp.png" alt="HP 4 Juta">
+                </div>
+                <div id="img-crown" class="image-card">
+                  <img src="./assets/ipad.png" alt="iPad 7,5 Juta">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scrolling-column space-y-48 md:space-y-96 mt-16 md:mt-0">
+            <div class="peringkat-item min-h-[60vh] flex flex-col justify-center" data-image-target="#img-gold">
+              <p class="text-lg font-medium tracking-widest text-[var(--sage-dark)] mb-2 anim fm-rise" style="--d:.1s;">Network Explosion</p>
+              <h2 class="text-5xl md:text-7xl font-extrabold text-white anim fm-clip mb-6">Gold Manager</h2>
+              <p class="mt-4 text-2xl text-[var(--sage)] font-semibold anim fm-rise" style="--d:.2s;">Hadiah : LM senilai 2 Juta</p>
+              <p class="mt-2 text-lg text-white anim fm-rise leading-relaxed" style="--d:.3s;">Syarat: TUPO 200 poin & memiliki 3 manager jalur berbeda (@1.500 poin) selama 2 bulan berturut-turut.</p>
+            </div>
+            <div class="peringkat-item min-h-[60vh] flex flex-col justify-center" data-image-target="#img-diamond">
+              <p class="text-lg font-medium tracking-widest text-[var(--sage-dark)] mb-2 anim fm-rise" style="--d:.1s;">Network Explosion</p>
+              <h2 class="text-5xl md:text-7xl font-extrabold text-white anim fm-clip mb-6">Diamond Manager</h2>
+              <p class="mt-4 text-2xl text-[var(--sage)] font-semibold anim fm-rise" style="--d:.2s;">Hadiah : HP senilai 4 Juta</p>
+              <p class="mt-2 text-lg text-white anim fm-rise leading-relaxed" style="--d:.3s;">Syarat: TUPO 200 poin & memiliki 6 manager jalur berbeda (@1.500 poin) selama 2 bulan berturut-turut.</p>
+            </div>
+            <div class="peringkat-item min-h-[60vh] flex flex-col justify-center" data-image-target="#img-crown">
+              <p class="text-lg font-medium tracking-widest text-[var(--sage-dark)] mb-2 anim fm-rise" style="--d:.1s;">Network Explosion</p>
+              <h2 class="text-5xl md:text-7xl font-extrabold text-white anim fm-clip mb-6">Crown Manager</h2>
+              <p class="mt-4 text-2xl text-[var(--sage)] font-semibold anim fm-rise" style="--d:.2s;">Hadiah : iPad senilai 7,5 Juta</p>
+              <p class="mt-2 text-lg text-white anim fm-rise leading-relaxed" style="--d:.3s;">Syarat: TUPO 200 poin & memiliki 9 manager jalur berbeda (@1.500 poin) selama 2 bulan berturut-turut.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section id="promo-stok" class="min-h-screen flex items-center justify-center">
+      <div class="max-w-7xl mx-auto px-6 w-full">
+        <div class="promo-grid">
+          <div class="promo-title-block anim fm-blurscale" style="--d:.1s;">
+            <h3 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+              <span class="text-[var(--sage)]">Stock</span> <br class="hidden md:block"/>and <span class="text-white">Rock!</span>
+            </h3>
+            <p class="mt-4 text-lg text-gray-400 max-w-sm">Keuntungan lebih untuk setiap aktivasi dan repeat order khusus Agen Stok Mumtas.</p>
+          </div>
+          <div class="promo-card anim fm-blurscale" style="--d:.2s;">
+            <div class="card-image-wrapper"><img src="./assets/trio tumbler.png" alt="Sub Stokis"></div>
+            <div class="card-overlay">
+              <p class="text-xl font-medium tracking-widest text-[var(--sage)] mb-1 overlay-text"></p>
+              <h3 class="text-4xl font-bold tracking-widest text-[var(--sage)] mb-4 overlay-text" style="--d:.1s;">SUB STOKIS</h3>
+              <div class="space-y-4 overlay-text" style="--d:.2s;">
+                <p class="font-semibold text-2xl">Syarat:</p>
+                <ul class="list-disc list-inside space-y-1 ml-4 text-gray-200 text-lg"><li>Aktivasi atau Repeat Order ke Gudang MUMTAS <span class="text-[var(--sage)] font-bold">IDR 3 Juta</span></li></ul>
+                <p class="font-semibold text-2xl pt-2">Hadiah:</p>
+                <ul class="list-disc list-inside space-y-1 ml-4 text-gray-200 text-lg"><li>Tumbler Eksklusif</li></ul>
+              </div>
+            </div>
+          </div>
+          <div class="promo-card anim fm-blurscale" style="--d:.3s;">
+            <div class="card-image-wrapper"><img src="./assets/vest.png" alt="Stokis"></div>
+            <div class="card-overlay">
+              <p class="text-xl font-medium tracking-widest text-[var(--sage)] mb-1 overlay-text"></p>
+              <h3 class="text-4xl font-bold tracking-widest text-[var(--sage)] mb-4 overlay-text" style="--d:.1s;">STOKIS</h3>
+              <div class="space-y-4 overlay-text" style="--d:.2s;">
+                <p class="font-semibold text-2xl">Syarat:</p>
+                <ul class="list-disc list-inside space-y-1 ml-4 text-gray-200 text-lg"><li>Aktivasi atau Repeat Order ke Gudang MUMTAS <span class="text-[var(--sage)] font-bold">IDR 5 Juta</span></li></ul>
+                <p class="font-semibold text-2xl pt-2">Hadiah:</p>
+                <ul class="list-disc list-inside space-y-1 ml-4 text-gray-200 text-lg"><li>Tumbler Eksklusif</li><li>Vest / Rompi</li></ul>
+              </div>
+            </div>
+          </div>
+          <div class="promo-card anim fm-blurscale" style="--d:.4s;">
+            <div class="card-image-wrapper"><img src="./assets/jas.png" alt="KC"></div>
+            <div class="card-overlay">
+              <p class="text-xl font-medium tracking-widest text-[var(--sage)] mb-1 overlay-text"></p>
+              <h3 class="text-5xl font-bold tracking-widest text-[var(--sage)] mb-4 overlay-text" style="--d:.1s;">KANTOR CABANG</h3>
+              <div class="space-y-4 overlay-text" style="--d:.2s;">
+                <p class="font-semibold text-2xl">Syarat:</p>
+                <ul class="list-disc list-inside space-y-1 ml-4 text-gray-200 text-lg"><li>Aktivasi atau Repeat Order ke Gudang MUMTAS <span class="text-[var(--sage)] font-bold">IDR 15 Juta</span></li></ul>
+                <p class="font-semibold text-2xl pt-2">Hadiah:</p>
+                <ul class="list-disc list-inside space-y-1 ml-4 text-gray-200 text-lg"><li>Tumbler Eksklusif</li><li>Jas Eksklusif</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="go-loyal-royal">
+      <div id="royal-sticky-wrapper">
+        <div id="reward-bg-container">
+          <div class="reward-bg-item"></div>
+          <div class="reward-bg-item"></div>
+        </div>
+        <div class="royal-shade"></div>
+
+        <div id="royal-title">
+          <p class="text-lg font-medium tracking-widest text-[var(--sage)] mb-2 uppercase anim fm-rise">Promo Eksklusif</p>
+          <h2 class="text-6xl md:text-8xl font-extrabold tracking-tight leading-none text-white anim fm-clip">
+            <span class="text-[var(--sage)]">GO LOYAL</span> GET ROYAL
+          </h2>
+          <p class="mt-2 text-xl text-gray-300 anim fm-rise">Apresiasi tertinggi untuk Loyal Manager.</p>
+        </div>
+
+        <div class="reward-text-block" data-reward-index="0">
+          <h3>Logam Mulia IDR 10 Juta</h3>
+          <p class="subtitle">Untuk Loyal Manager berkinerja tinggi.</p>
+          <ul class="space-y-1 mt-2">
+            <li>TUPO Pribadi: <span>600 poin</span></li>
+            <li>Bonus Bersih: min <span>IDR 5 Juta</span></li>
+          </ul>
+        </div>
+        <div class="reward-text-block" data-reward-index="1">
+          <h3>Tiket Umrah</h3>
+          <p class="subtitle">Raih hadiah spiritual dari pencapaian terbaik Anda.</p>
+          <ul class="space-y-1 mt-2">
+            <li>TUPO Pribadi: <span>600 poin</span></li>
+            <li>Bonus Bersih: min <span>IDR 10 Juta</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="royal-scroll-content">
+        <div class="reward-trigger-space" data-target-index="0"></div>
+        <div class="reward-trigger-space" data-target-index="1"></div>
+        <div class="royal-end-pad"></div>
+      </div>
+    </section>
+
+    <section id="footer">
+      <h1 id="footer-giant">MUMTAS</h1>
+      <div class="footer-inner">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-[var(--ink)]">Mari Bergabung dan Raih Promo MUMTAS!</h2>
+        <p class="mt-4 text-xl text-[var(--ink)]/70">Pastikan untuk memahami semua detail promo, unduh Surat Keputusan di bawah.</p>
+        <div class="btns">
+          <a href="https://drive.google.com/drive/folders/1iCiW-OPiN76xRumXCQMAl3Y7q5ostooB?usp=share_link" download class="btn btn-primary">Unduh SK Promo</a>
+          <a href="https://mumtas.net" target="_blank" class="btn btn-ghost">Login MOS</a>
+        </div>
+        <div class="footer-links mt-6">
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Syarat &amp; Ketentuan</a>
+          <a href="#">Hubungi Kami</a>
+          <a href="#">FAQ</a>
+          <a href="#">Status Sistem</a>
+          <a href="#">Pusat Bantuan</a>
+        </div>
+        <div class="footer-utility">&copy; 2025 Mumtas. All rights reserved.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
