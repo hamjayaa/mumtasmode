@@ -11,7 +11,7 @@ const tutorials = [
         <li>Klik tombol <b>Masuk</b>dan Anda akan diarahkan ke dashboard MOS</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931517/login_1_eyqexi.mp4'
+    videoUrl: 'login2-2.mp4'
   },
   {
     title: 'Kartu Tanda Agen',
@@ -23,7 +23,7 @@ const tutorials = [
         <li>Alternatif link yang bisa disalin untuk pendaftaran mitra jika calon mitra tidak bisa scan QR Code</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931384/kartu_tanda_agen_br8nhr.mov'
+    videoUrl: 'kartu_tanda_agen.mp4'
   },
   {
     title: 'Cari Toko Agen',
@@ -36,7 +36,7 @@ const tutorials = [
         <li>Bagi Agen Stok: Pastikan sudah mengatur Toko melalui menu <b>Pengelolaan Toko</b></li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931433/cari_toko_b9lfey.mov'
+    videoUrl: 'cari_toko.mp4'
   },
   {
     title: 'Mumtas Wallet',
@@ -125,7 +125,7 @@ const tutorials = [
         <li>Klik tombol Lihat Detail untuk membuka invoice secara lengkap.</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931328/riwayat_h0nimc.mov'
+    videoUrl: 'riwayat.mp4'
   },
   {
     title: 'Stok Barang',
@@ -137,7 +137,7 @@ const tutorials = [
         <li>Pastikan sudah benar, lalu klik Simpan</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931638/stok_barang_tsxngq.mov'
+    videoUrl: 'stok_barang.mp4'
   },
   {
     title: 'Transaksi',
@@ -160,7 +160,7 @@ const tutorials = [
         <li>Angka pada proyeksi bonus bersifat estimasi, dan dapat berubah sesuai progres hingga akhir bulan</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931897/laporan_bonus_uvclmr.mov'
+    videoUrl: 'laporan_bonus.mp4'
   },
   {
     title: 'Reward',
@@ -171,7 +171,7 @@ const tutorials = [
         <li>Setelah target tercapai, sistem akan menampilkan status bahwa reward bisa diajukan untuk pencairan</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931451/reward_i0u73u.mov'
+    videoUrl: 'reward.mp4'
   },
   {
     title: 'Group Sales Report',
@@ -182,7 +182,7 @@ const tutorials = [
         <li>Dapat mengganti periode dengan memilih rentang tanggal di bagian atas</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931605/group_sales_report_kewwsz.mov'
+    videoUrl: 'group_sales_report-2.mp4'
   },
   {
     title: 'Purchase Maintain Report',
@@ -219,7 +219,7 @@ const tutorials = [
         <li>Setelah semua kolom diisi dengan benar; Klik tombol Buat untuk mendaftarkan agen baru</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931355/registrasi_zwpygj.mov'
+    videoUrl: 'registrasi.mp4'
   },
   {
     title: 'Genealogi',
@@ -232,7 +232,7 @@ const tutorials = [
         <li>Klik salah satu nama agen, panel Data Detail di sisi kanan akan menampilkan informasi lengkap agen tersebut</li>
       </ul>
     `,
-    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931399/genealogi_cymyzo.mov'
+    videoUrl: 'genealogi-2.mp4'
   }
 ];
 
