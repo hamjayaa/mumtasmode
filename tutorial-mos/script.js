@@ -171,7 +171,7 @@ const tutorials = [
         <li>Setelah target tercapai, sistem akan menampilkan status bahwa reward bisa diajukan untuk pencairan</li>
       </ul>
     `,
-    videoUrl: 'reward.mp4'
+    videoUrl: 'https://res.cloudinary.com/doqzgozyt/video/upload/f_mp4,q_auto,vc_h264/v1761931451/reward_i0u73u.mov'
   },
   {
     title: 'Group Sales Report',
