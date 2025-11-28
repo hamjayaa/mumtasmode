@@ -1,3 +1,24 @@
+/* ===========================
+   BASE & GLOBAL TYPOGRAPHY
+   =========================== */
+
+html {
+    /* Base font gede dikit, cocok buat presentasi */
+    font-size: 22px;
+}
+
+@media (min-width: 1280px) {
+    html {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1536px) {
+    html {
+        font-size: 26px;
+    }
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: #050507;
@@ -6,6 +27,10 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/* ===========================
+   SLIDE LAYOUT & TRANSITIONS
+   =========================== */
 
 .slide-container {
     width: 100vw;
@@ -37,19 +62,78 @@ body {
     z-index: 10;
 }
 
-.slide.exit-next { transform: translate3d(-100px, 0, -300px) scale(0.9); opacity: 0; filter: blur(20px); z-index: 0; }
-.slide.exit-prev { transform: translate3d(100px, 0, -300px) scale(0.9); opacity: 0; filter: blur(20px); z-index: 0; }
-.slide.enter-next { transform: translate3d(100px, 0, 200px) scale(1.2); opacity: 0; }
-.slide.enter-prev { transform: translate3d(-100px, 0, 200px) scale(1.2); opacity: 0; }
+.slide.exit-next {
+    transform: translate3d(-100px, 0, -300px) scale(0.9);
+    opacity: 0;
+    filter: blur(20px);
+    z-index: 0;
+}
 
-/* --- Animations --- */
-.slide.active .reveal-text { animation: slideUpFade 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
-.slide.active .reveal-side { animation: slideSideFade 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
-.slide.active .reveal-zoom { animation: zoomFade 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
+.slide.exit-prev {
+    transform: translate3d(100px, 0, -300px) scale(0.9);
+    opacity: 0;
+    filter: blur(20px);
+    z-index: 0;
+}
 
-@keyframes slideUpFade { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideSideFade { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes zoomFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+.slide.enter-next {
+    transform: translate3d(100px, 0, 200px) scale(1.2);
+    opacity: 0;
+}
+
+.slide.enter-prev {
+    transform: translate3d(-100px, 0, 200px) scale(1.2);
+    opacity: 0;
+}
+
+/* ===========================
+   ANIMATIONS
+   =========================== */
+
+.slide.active .reveal-text {
+    animation: slideUpFade 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+.slide.active .reveal-side {
+    animation: slideSideFade 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+.slide.active .reveal-zoom {
+    animation: zoomFade 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideSideFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomFade {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
@@ -57,9 +141,16 @@ body {
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
 
-.reveal-text, .reveal-side, .reveal-zoom { opacity: 0; }
+.reveal-text,
+.reveal-side,
+.reveal-zoom {
+    opacity: 0;
+}
 
-/* --- Components --- */
+/* ===========================
+   COMPONENTS
+   =========================== */
+
 .glass-nav {
     background: rgba(20, 20, 23, 0.6);
     backdrop-filter: blur(20px);
@@ -68,13 +159,13 @@ body {
 
 .bento-card {
     background-color: #111113;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     overflow: hidden;
     transition: all 0.4s ease;
 }
 
-.bento-card:hover { 
+.bento-card:hover {
     background-color: #161618;
     border-color: rgba(59, 130, 246, 0.3);
     box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.15);
@@ -89,7 +180,7 @@ body {
 /* --- Pricing Style --- */
 .pricing-box {
     background: #111113;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
     padding: 2.5rem;
     text-align: center;
@@ -136,7 +227,7 @@ body {
     position: relative;
     padding: 2rem;
     background: #111113;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     height: 100%;
     transition: all 0.3s ease;
@@ -165,6 +256,7 @@ body {
     font-size: 0.8rem;
 }
 
+/* Ambient Background */
 .bg-ambient {
     position: absolute;
     width: 100vw;
@@ -174,78 +266,93 @@ body {
     animation: breathe 8s infinite alternate;
 }
 
-@keyframes breathe { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 1; transform: scale(1.1); } }
+@keyframes breathe {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
 
-.grow-bar { width: 0%; transition: width 1.5s ease-out; }
+/* Progress bars slide 11 */
+.grow-bar {
+    width: 0%;
+    transition: width 1.5s ease-out;
+}
+
 .slide.active .grow-bar.w-85 { width: 85%; }
 .slide.active .grow-bar.w-40 { width: 40%; }
 .slide.active .grow-bar.w-65 { width: 65%; }
 
-::-webkit-scrollbar { width: 0px; background: transparent; }
-
-/* =============================================
-   PRESENTATION MODE — BUAT FONTS JAUH LEBIH BESAR
-   ============================================= */
-
-/* Base font gede */
-html {
-    font-size: 22px;       /* default 16px → 22px = +37.5% */
+/* Scrollbar hide */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
-@media (min-width: 1280px) {
-    html {
-        font-size: 24px;   /* layar besar */
-    }
+/* =========================================
+   PRESENTATION TUNING — BIAR LEBIH KEBACA
+   ========================================= */
+
+/* Kurangi ruang kosong vertikal slide */
+.slide {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
 }
 
-@media (min-width: 1536px) {
-    html {
-        font-size: 26px;   /* projector / TV / monitor gede */
-    }
+/* Besarin area max-width supaya card ga sempit */
+.max-w-6xl {
+    max-width: 1600px !important;
 }
 
-/* Heading utama gede banget */
-.slide h1,
-.slide h2,
-.slide h3 {
-    letter-spacing: -0.01em;
+.max-w-5xl {
+    max-width: 1500px !important;
 }
 
-/* H1 — title slide */
+.max-w-4xl {
+    max-width: 1400px !important;
+}
+
+/* Heading & teks di dalam slide (overrides Tailwind) */
 .slide h1 {
-    font-size: 3.8rem !important;   /* setara text-7xl */
-    font-weight: 900;
+    font-size: 4rem !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.02em !important;
 }
 
-/* H2 — section title */
 .slide h2 {
-    font-size: 2.8rem !important;   /* text-5xl → lebih gede */
-    font-weight: 800;
+    font-size: 3.6rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
 }
 
-/* H3 — sub title */
 .slide h3 {
-    font-size: 1.8rem !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
 }
 
-/* Paragraf biar jelas audience */
+/* Paragraf utama */
 .slide p {
-    font-size: 1.25rem !important;   /* 20px–22px */
-    line-height: 1.75;
+    font-size: 1.35rem !important;   /* sekitar 22–24px di desktop */
+    line-height: 1.8 !important;
 }
 
-/* List item juga gedein */
+/* List item */
 .slide li {
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important;
+    line-height: 1.7 !important;
 }
 
-/* Label kecil (subtitle / kategori) */
+/* Label kecil / span subtitle */
 .slide span,
 .slide small {
-    font-size: 0.95rem !important;
+    font-size: 1.05rem !important;
 }
 
-/* Card container padding lebih lega */
+/* Sedikit boost padding di kartu biar lega setelah font dibesarin */
 .bento-card,
 .pricing-box,
 .process-step {
