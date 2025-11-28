@@ -182,3 +182,72 @@ body {
 .slide.active .grow-bar.w-65 { width: 65%; }
 
 ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+/* =============================================
+   PRESENTATION MODE — BUAT FONTS JAUH LEBIH BESAR
+   ============================================= */
+
+/* Base font gede */
+html {
+    font-size: 22px;       /* default 16px → 22px = +37.5% */
+}
+
+@media (min-width: 1280px) {
+    html {
+        font-size: 24px;   /* layar besar */
+    }
+}
+
+@media (min-width: 1536px) {
+    html {
+        font-size: 26px;   /* projector / TV / monitor gede */
+    }
+}
+
+/* Heading utama gede banget */
+.slide h1,
+.slide h2,
+.slide h3 {
+    letter-spacing: -0.01em;
+}
+
+/* H1 — title slide */
+.slide h1 {
+    font-size: 3.8rem !important;   /* setara text-7xl */
+    font-weight: 900;
+}
+
+/* H2 — section title */
+.slide h2 {
+    font-size: 2.8rem !important;   /* text-5xl → lebih gede */
+    font-weight: 800;
+}
+
+/* H3 — sub title */
+.slide h3 {
+    font-size: 1.8rem !important;
+}
+
+/* Paragraf biar jelas audience */
+.slide p {
+    font-size: 1.25rem !important;   /* 20px–22px */
+    line-height: 1.75;
+}
+
+/* List item juga gedein */
+.slide li {
+    font-size: 1.2rem !important;
+}
+
+/* Label kecil (subtitle / kategori) */
+.slide span,
+.slide small {
+    font-size: 0.95rem !important;
+}
+
+/* Card container padding lebih lega */
+.bento-card,
+.pricing-box,
+.process-step {
+    padding: 2.2rem !important;
+}
