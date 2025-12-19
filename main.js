@@ -11,8 +11,8 @@ const PRODUCT_LIST = [
   { name: "Mumtas Mie – Collagen", desc: "Mie sehat kaya kolagen yang tidak hanya lezat, tetapi juga merawat elastisitas dan keremajaan kulit dari dalam..", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758629446/Gemini_Generated_Image_lya3t5lya3t5lya3_hanvvj.png" },
   { name: "Mumtas Mie - Moringa", desc: "Mie bergizi tinggi daun kelor untuk energi alami dan nutrisi lengkap setiap hari.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758629447/Gemini_Generated_Image_in7tavin7tavin7t_hqwkfs.png" },
   { name: "Mumtas Mie – Spirulina", desc: "Mie fungsional tinggi spirulina yang mendukung kekebalan tubuh dan kesehatan organ vital setiap hari.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758630144/Gemini_Generated_Image_zfxj4kzfxj4kzfxj_mdk9uv.png" },
-  { name: "Natura Oil Squa", desc: "Natura Oil Squa merupakan suplemen alami dari minyak hati ikan hiu yang kaya squalene.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758627658/Gemini_Generated_Image_ec93u5ec93u5ec93_xn3hvz.png" },
-  { name: "Gamin Gathuk", desc: "Gamin Gathuk merupakan suplemen perpaduan ekstrak ikan gabus yang kaya albumin dan ekstrak gamat yang tinggi kolagen.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1758520869/Gamin_Gathuk_lmzvyg.png" }
+  { name: "Shark Oil Squa", desc: "Shark Oil Squa merupakan suplemen alami dari minyak hati ikan hiu yang kaya squalene.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1766112230/Shark_Oil_Squa_1_htjapw.png" },
+  { name: "Gamatuk", desc: "Gamatuk merupakan suplemen perpaduan ekstrak ikan gabus yang kaya albumin dan ekstrak gamat yang tinggi kolagen.", img: "https://res.cloudinary.com/doqzgozyt/image/upload/v1766112402/Gamatuk_1_gvy35u.png" }
 ];
 const GALLERY_IMAGES = [
   "https://res.cloudinary.com/doqzgozyt/image/upload/v1758520870/Madu_Multiflora_zuyyj3.png",
