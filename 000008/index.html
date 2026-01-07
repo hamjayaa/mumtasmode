@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUMTAS | Halal & Thoyyib Lifestyle Authority</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@100;300;400;600;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+    <div class="paper-overlay"></div>
+    <div id="cursor"></div>
+    <div id="floatingPreview" class="floating-preview rounded-lg"><img id="previewImg" src="" class="w-full h-full object-cover"></div>
+
+    <nav class="fixed top-0 w-full z-[100] px-8 py-8 md:py-10 flex justify-between items-center mix-blend-difference text-white nav-reveal">
+        <div class="serif italic text-2xl md:text-3xl font-black tracking-tighter cursor-pointer" onclick="scrollToPage(0)">
+            Mumtas.
+        </div>
+        <div class="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.4em]">
+            <a href="javascript:void(0)" onclick="scrollToPage(1)" class="btn-premium">Manifest</a>
+            <a href="javascript:void(0)" onclick="scrollToPage(2)" class="btn-premium">Visi</a>
+            <a href="javascript:void(0)" onclick="scrollToPage(3)" class="btn-premium">Produk</a>
+            <a href="javascript:void(0)" onclick="scrollToPage(4)" class="btn-premium">Testimoni</a>
+            <a href="javascript:void(0)" onclick="scrollToPage(5)" class="btn-premium">Gabung</a>
+        </div>
+        <div class="text-[9px] font-bold uppercase tracking-widest border border-white/20 px-4 py-2 rounded-full">
+            Vol. 01 / 2025
+        </div>
+    </nav>
+
+    <main class="magazine-container" id="mainContainer">
+        <section class="page-spread active bg-transparent flex items-center justify-center">
+            <div class="max-w-7xl mx-auto px-6 w-full text-center flex flex-col items-center justify-center relative z-10">
+                <div class="overflow-hidden mb-4 reveal-text-top">
+                    <p class="reveal-text text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.8em] md:tracking-[1.2em] opacity-40 italic">A Global Standard of Thoyyib</p>
+                </div>
+                <div class="relative w-full px-4 md:px-12 flex justify-center">
+                    <h1 class="serif text-[24vw] md:text-[20vw] leading-[0.85] font-black italic tracking-tighter mb-8 md:mb-12 select-none text-emerald-950 inline-block title-reveal">
+                        MUMTAS
+                    </h1>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 mt-4 subtitle-reveal">
+                    <p class="serif italic text-2xl md:text-3xl opacity-80 max-w-xs text-center md:text-left leading-tight">Authority in Halal <br class="hidden md:block">& Thoyyib Lifestyle.</p>
+                    <div class="w-px h-16 bg-emerald-900/10 hidden md:block"></div>
+                    <div class="text-center md:text-left">
+                        <p class="text-[11px] font-black uppercase tracking-[0.3em] mb-1">Origin: Yogyakarta</p>
+                        <p class="text-[10px] font-medium uppercase tracking-[0.2em] opacity-50">Established MMXXIV</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30 scroll-indicator">
+                <span class="text-[9px] font-black uppercase tracking-widest">Scroll Down</span>
+                <div class="w-px h-12 bg-black"></div>
+            </div>
+        </section>
+
+        <section class="page-spread bg-white section-reveal">
+            <div class="grid md:grid-cols-12 gap-0 w-full h-full">
+                <div class="md:col-span-6 h-[40vh] md:h-full relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" alt="Nature">
+                    <div class="absolute inset-0 bg-emerald-950/20"></div>
+                </div>
+                <div class="md:col-span-6 flex flex-col justify-center p-12 md:p-24 bg-[#faf9f6]/80 backdrop-blur-sm">
+                    <span class="text-emerald-800 text-[10px] font-black uppercase tracking-[0.4em] mb-10 block">01 / The Manifesto</span>
+                    <h2 class="serif text-4xl md:text-7xl italic leading-[0.9] mb-10 text-emerald-950">Beyond <br>Certifications.</h2>
+                    <p class="text-lg md:text-xl text-emerald-900/70 leading-relaxed mb-10 font-light italic">
+                        "Kami tidak hanya bicara tentang label. Kami bicara tentang keberkahan dari hulu ke hilir. Thoyyib adalah standar emas hidup manusia modern."
+                    </p>
+                    <div class="grid grid-cols-2 gap-8 md:gap-12 pt-10 border-t border-emerald-900/10">
+                        <div>
+                            <p class="serif text-3xl md:text-4xl font-bold italic text-emerald-900">100%</p>
+                            <p class="text-[9px] font-black uppercase opacity-40 tracking-widest mt-2">Ethical Sourcing</p>
+                        </div>
+                        <div>
+                            <p class="serif text-3xl md:text-4xl font-bold italic text-emerald-900">Global</p>
+                            <p class="text-[9px] font-black uppercase opacity-40 tracking-widest mt-2">Quality Standards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-spread bg-emerald-950 text-white overflow-hidden section-reveal">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 serif text-[32vw] opacity-[0.03] font-black italic pointer-events-none select-none">VISION</div>
+            <div class="max-w-7xl mx-auto px-8 w-full py-20 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+                    <div>
+                        <p class="text-emerald-400 text-[11px] font-black uppercase tracking-[0.5em] mb-8">Our Ambition</p>
+                        <h3 class="serif text-4xl md:text-7xl italic font-light leading-tight">
+                            Menjadi Pemimpin <br>
+                            <span class="text-emerald-400 font-black">Industri Halal</span> <br>
+                            Kelas Dunia.
+                        </h3>
+                    </div>
+                    <div class="space-y-10 md:space-y-12">
+                        <div class="border-l-2 border-emerald-500/30 pl-8 py-2">
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-4">Pilar 01</h4>
+                            <p class="text-base md:text-lg font-light opacity-80 leading-relaxed">Membangun ekosistem bisnis yang menjadi kebanggaan Ummat.</p>
+                        </div>
+                        <div class="border-l-2 border-emerald-500/30 pl-8 py-2">
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-4">Pilar 02</h4>
+                            <p class="text-base md:text-lg font-light opacity-80 leading-relaxed">Edukasi masif mengenai gaya hidup Thoyyib sebagai solusi kesehatan modern.</p>
+                        </div>
+                        <div class="border-l-2 border-emerald-500/30 pl-8 py-2">
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-4">Pilar 03</h4>
+                            <p class="text-base md:text-lg font-light opacity-80 leading-relaxed">Kaderisasi pengusaha muslim dengan integritas moral dan profesionalisme tinggi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-spread bg-transparent section-reveal">
+            <div class="max-w-7xl mx-auto px-8 w-full py-20 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20">
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-[0.5em] mb-4 opacity-40">03 / Mumtas Selection</p>
+                        <h2 class="serif text-5xl md:text-7xl italic font-black text-emerald-950">Our Products.</h2>
+                    </div>
+                    <div class="w-full md:w-80 mt-10 md:mt-0">
+                        <input type="text" id="searchInput" placeholder="SEARCH ARCHIVE..." class="w-full bg-transparent border-b-2 border-emerald-950/10 py-4 text-[11px] font-black tracking-widest focus:outline-none focus:border-emerald-700 transition-all uppercase">
+                    </div>
+                </div>
+                <div class="max-h-[60vh] overflow-y-auto no-scrollbar pr-4">
+                    <div class="grid md:grid-cols-2 gap-x-10 md:gap-x-20">
+                        <div id="col-1" class="space-y-0"></div>
+                        <div id="col-2" class="space-y-0"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-spread bg-[#faf9f6] section-reveal" id="testimoni-section">
+            <div class="max-w-7xl mx-auto px-8 w-full py-20 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20">
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-[0.5em] mb-4 opacity-40">04 / Mumtas Voices</p>
+                        <h2 class="serif text-5xl md:text-7xl italic font-black text-emerald-950">Testimoni Produk.</h2>
+                    </div>
+                    <div class="w-full md:w-80 mt-10 md:mt-0">
+                        <p class="text-[11px] font-medium uppercase tracking-[0.2em] opacity-60">Bagikan pengalaman Anda dengan produk Mumtas</p>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-[3fr_1fr] gap-12 md:gap-24"> <div class="overflow-hidden no-scrollbar pr-4"> <h3 class="serif italic text-3xl md:text-4xl font-bold text-emerald-950 mb-8">Baarakallahu Fiikum</h3>
+                        <div class="testimoni-container">
+                            <div id="testimoni-inner" class="testimoni-inner">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 md:p-12 rounded-sm shadow-lg border border-emerald-900/5">
+                        <h3 class="serif italic text-3xl md:text-4xl font-bold text-emerald-950 mb-8">Kirim Testimoni Anda</h3>
+                        <a href="https://forms.gle/wv1XXMaB7HKa4Ywb6" target="_blank" class="w-full bg-emerald-950 text-white py-4 md:py-5 rounded-sm text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black transition-all shadow-lg block text-center">
+                            Buka Form Testimoni
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -bottom-10 right-0 serif text-[20vw] font-black italic opacity-[0.03] select-none pointer-events-none leading-none">VOICES</div>
+        </section>
+
+        <section class="page-spread bg-[#f0ede6] section-reveal">
+            <div class="max-w-7xl mx-auto px-8 w-full grid md:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="md:col-span-7">
+                    <span class="text-emerald-800 text-[11px] font-black uppercase tracking-[0.5em] mb-10 block">05 / Join the Movement</span>
+                    <h2 class="serif text-5xl md:text-[8vw] italic leading-[0.85] font-black text-emerald-950 mb-12 tracking-tighter">
+                        Mulai Langkah <br>Bersama Kami.
+                    </h2>
+                    <p class="text-xl md:text-2xl text-emerald-900/60 leading-relaxed font-light italic max-w-2xl mb-12">
+                        "Bergabunglah dalam jaringan eksklusif Mumtas. Menjadi bagian dari ekosistem ekonomi syariah yang murni, berintegritas, dan mendunia."
+                    </p>
+                </div>
+                <div class="md:col-span-5 flex flex-col gap-6">
+                    <a href="https://wa.me/6282134379132?text=Assalamu'alaikum%20Mumtas,%20saya%20tertarik%20bergabung%20menjadi%20Agen%20Stok." target="_blank" class="group bg-emerald-950 text-white p-10 rounded-sm transition-all hover:bg-black relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h4 class="serif text-3xl italic mb-2">Agen Stok Mumtas</h4>
+                            <p class="text-[10px] font-black uppercase tracking-widest opacity-60">Distribution Partner</p>
+                        </div>
+                        <div class="absolute right-8 bottom-8 group-hover:translate-x-2 transition-transform">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14m0 0l-7-7m7 7l-7 7"/></svg>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/6282134379132?text=Assalamu'alaikum%20Mumtas,%20saya%20ingin%20mendaftar%20menjadi%20Member." target="_blank" class="group bg-white border border-emerald-950/10 text-emerald-950 p-10 rounded-sm transition-all hover:border-emerald-950 relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h4 class="serif text-3xl italic mb-2">Member Mumtas</h4>
+                            <p class="text-[10px] font-black uppercase tracking-widest opacity-40">Loyalty Circle</p>
+                        </div>
+                        <div class="absolute right-8 bottom-8 group-hover:translate-x-2 transition-transform text-emerald-950">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14m0 0l-7-7m7 7l-7 7"/></svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="absolute -bottom-10 right-0 serif text-[20vw] font-black italic opacity-[0.03] select-none pointer-events-none leading-none">JOIN</div>
+        </section>
+
+        <section class="page-spread bg-[#0a0a0a] text-white section-reveal">
+            <div class="max-w-7xl mx-auto px-8 w-full h-full flex flex-col justify-between py-16 md:py-20 relative z-10">
+                <div class="grid md:grid-cols-12 gap-12">
+                    <div class="md:col-span-6">
+                        <h2 class="serif text-7xl md:text-[12vw] italic font-black text-white/5 leading-none">MUMTAS</h2>
+                    </div>
+                    <div class="md:col-span-3">
+                        <h4 class="text-emerald-500 text-[10px] font-black uppercase tracking-widest mb-6 md:mb-8">Headquarters</h4>
+                        <p class="text-sm opacity-50 leading-loose">Jl. Wiyoro Raya No.19 Baturetno,<br>Banguntapan, Bantul, Yogyakarta<br>Indonesia, 55197</p>
+                    </div>
+                    <div class="md:col-span-3">
+                        <h4 class="text-emerald-500 text-[10px] font-black uppercase tracking-widest mb-6 md:mb-8">Connect</h4>
+                        <ul class="space-y-4">
+                            <li><a href="https://instagram.com" class="text-sm font-bold uppercase tracking-widest border-b border-white/10 hover:border-white transition-all">Instagram</a></li>
+                            <li><a href="https://wa.me/6282134379132" class="text-sm font-bold uppercase tracking-widest border-b border-white/10 hover:border-white transition-all">WhatsApp Business</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between items-end gap-10 border-t border-white/5 pt-12">
+                    <div class="max-w-md text-left">
+                        <p class="text-[9px] font-medium uppercase tracking-[0.4em] opacity-30 leading-relaxed">
+                            PT Mumtaz Halalanthoyyiban Sejahtera adalah otoritas jaringan produk halal yang berfokus pada kualitas thibbunnabawi dan pemberdayaan ekonomi syariah melalui standar Thoyyib kelas dunia.
+                        </p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <p class="text-[10px] font-black tracking-[0.6em] uppercase mb-4">© 2025 All Rights Reserved</p>
+                        <p class="serif italic text-xl md:text-2xl opacity-40">Murnikan Niat, Maksimalkan Ikhtiar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="productModal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-emerald-950/40 backdrop-blur-xl opacity-0 transition-all duration-500">
+        <div class="bg-white max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col md:flex-row rounded-lg relative scale-95 transition-all">
+            <button onclick="closeModal()" class="absolute top-6 right-6 md:top-8 md:right-8 z-[1100] group">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-emerald-950 text-white rounded-full flex items-center justify-center group-hover:rotate-90 transition-all">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+                </div>
+            </button>
+            <div class="md:w-1/2 bg-slate-100 overflow-hidden h-64 md:h-auto">
+                <img id="modalImg" src="" class="w-full h-full object-cover">
+            </div>
+            <div class="md:w-1/2 p-8 md:p-20 flex flex-col justify-center bg-white overflow-y-auto">
+                <p id="modalTag" class="text-emerald-800 text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] mb-6 md:mb-8"></p>
+                <h2 id="modalTitle" class="serif italic text-4xl md:text-7xl font-black text-emerald-950 mb-8 md:mb-10 leading-[0.85] tracking-tighter"></h2>
+                <div class="grid grid-cols-3 gap-4 md:gap-8 py-8 border-y border-emerald-900/5 mb-8">
+                    <div>
+                        <p class="text-[9px] font-black uppercase opacity-40 mb-2 tracking-widest">Consumer</p>
+                        <p id="priceK" class="text-base md:text-xl font-black text-emerald-950"></p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-black uppercase opacity-40 mb-2 tracking-widest">Member</p>
+                        <p id="priceA" class="text-base md:text-xl font-black text-emerald-700"></p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-black uppercase opacity-40 mb-2 tracking-widest">Point</p>
+                        <p id="poinVal" class="text-base md:text-xl font-black text-blue-900"></p>
+                    </div>
+                </div>
+                <div id="modalDesc" class="text-emerald-900/60 leading-relaxed italic text-base md:text-lg mb-10 md:mb-12"></div>
+                <button onclick="orderNow()" class="w-full bg-emerald-950 text-white py-5 md:py-6 rounded-sm text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black transition-all shadow-lg">
+                    Request Information
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
