@@ -1,0 +1,199 @@
+:root {
+    --bg-paper: #fcfaf7;
+    --text-dark: #0a0a0a;
+    --emerald-deep: #064e3b;
+    --gold-accent: #b4a07d;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-paper);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    cursor: none;
+}
+
+.serif { 
+    font-family: 'Playfair Display', serif; 
+}
+
+/* Tekstur Kertas */
+.paper-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Magazine Layout Control */
+.magazine-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+}
+.magazine-container::-webkit-scrollbar { display: none; }
+
+.page-spread {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Fluid Typography Reveal (lama) */
+.reveal-text {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.page-spread:not(.active) .reveal-text {
+    transform: translateY(110%);
+}
+
+/* Custom Cursor */
+#cursor {
+    width: 16px;
+    height: 16px;
+    background: var(--text-dark);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transition: width 0.3s, height 0.3s, background 0.3s, transform 0.08s ease-out;
+    mix-blend-mode: difference;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.cursor-hover #cursor {
+    width: 0px; height: 0px;
+    background: white;
+    opacity: 0;
+    transform: translate(-45%, -45%);
+    border: 1px solid white;
+}
+
+.floating-preview {
+    position: fixed;
+    width: 280px;
+    height: 380px;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+    transition: opacity 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.floating-preview.visible { 
+    opacity: 1; 
+    transform: scale(1) rotate(0deg); 
+}
+
+.btn-premium {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+}
+.btn-premium::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; width: 0; height: 1px;
+    background: var(--emerald-deep);
+    transition: width 0.3s ease;
+}
+.btn-premium:hover::after { width: 100%; }
+
+@media (max-width: 768px) {
+    .page-spread { 
+        height: auto; 
+        min-height: 100vh; 
+        scroll-snap-align: none; 
+    }
+    .magazine-container { 
+        scroll-snap-type: none; 
+        overflow-y: auto; 
+    }
+    #cursor { display: none; }
+}
+
+/* Styling untuk section testimoni - DIPERBAIKI */
+#testimoni-section {
+    position: relative;
+}
+
+.testimoni-container {
+    overflow: hidden;
+    white-space: nowrap;
+    /* Perbaikan: Menambahkan padding agar shadow dan konten tidak terpotong */
+    padding: 2rem 1rem; 
+    margin: -2rem -1rem; /* Kompensasi margin agar layout tidak bergeser */
+}
+
+.testimoni-inner {
+    display: inline-flex;
+    /* Pastikan item rata atas jika tinggi berbeda, atau stretch agar sama tinggi */
+    align-items: stretch; 
+    animation: marquee 60s linear infinite;
+}
+
+.testimoni-inner.paused {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.testimoni-container:hover .testimoni-inner {
+    animation-play-state: paused;
+}
+
+.testimoni-item {
+    min-width: 400px;
+    max-width: 450px; /* Tambahkan max-width agar teks wrap lebih rapi */
+    margin-right: 2rem;
+    padding: 2.5rem; /* Padding lebih lega */
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); /* Shadow lebih halus */
+    /* Perbaikan: Hapus inline-block karena parent flex */
+    white-space: normal;
+    height: auto;
+    /* Flex column untuk merapikan isi */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.testimoni-item h4 {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.testimoni-item p {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+.testimoni-item span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.25rem;
+}
